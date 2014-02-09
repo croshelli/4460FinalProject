@@ -1,0 +1,156 @@
+Country,Continent,Region,yr_1990,yr_1980,yr_1970,yr_1960
+British Isles,Europe,Northern Europe,"809,972","866,966","937,474","1,171,777"
+United Kingdom,Europe,Northern Europe,"640,145","669,149","686,099","833,055"
+Great Britain (total),Europe,Northern Europe,"623,614","649,318","645,262","764,893"
+England,Europe,Northern Europe,"405,588","442,499","458,114","528,205"
+Scotland,Europe,Northern Europe,"104,168","142,001","170,134","213,219"
+Wales,Europe,Northern Europe,"10,638","13,528","17,014","23,469"
+Great Britain n.e.c.,Europe,Northern Europe,"103,220","51,290",0,0
+Northern Ireland,Europe,Northern Europe,"16,531","19,831","40,837","68,162"
+Ireland,Europe,Northern Europe,"169,827","197,817","251,375","338,722"
+Scandinavia,Europe,Northern Europe,"158,299","216,533","334,117","522,653"
+Denmark,Europe,Northern Europe,"34,999","42,732","61,410","85,060"
+Finland,Europe,Northern Europe,"22,313","29,172","45,499","67,624"
+Iceland,Europe,Northern Europe,"5,071","4,156","2,895","2,780"
+Norway,Europe,Northern Europe,"42,240","63,316","97,243","152,698"
+Sweden,Europe,Northern Europe,"53,676","77,157","127,070","214,491"
+Low countries,Europe,Western Europe,"132,617","142,748","155,513","173,069"
+Belgium,Europe,Western Europe,"34,366","36,487","41,412","50,294"
+Luxembourg,Europe,Western Europe,"2,053","3,125","3,531","4,360"
+Netherlands,Europe,Western Europe,"96,198","103,136","110,570","118,415"
+Austria,Europe,Western Europe,"87,673","145,607","214,014","304,507"
+France,Europe,Western Europe,"119,233","120,215","105,385","111,582"
+Germany,Europe,Western Europe,"711,929","849,384","832,965","989,815"
+Switzerland,Europe,Western Europe,"39,130","42,804","49,732","61,568"
+Greece,Europe,Southern Europe,"177,398","210,998","177,275","159,167"
+Italy,Europe,Southern Europe,"580,592","831,922","1,008,533","1,256,999"
+Malta,Europe,Southern Europe,"9,614","10,182",0,0
+Portugal (total),Europe,Southern Europe,"210,122","209,968","119,899","80,276"
+Azores,Europe,Southern Europe,"29,656","32,531","28,865","22,586"
+Portugal,Europe,Southern Europe,"180,466","177,437","91,034","57,690"
+Spain,Europe,Southern Europe,"76,415","73,735","57,488","44,999"
+Albania,Europe,Eastern Europe,"5,627","7,381","9,180","9,618"
+Bulgaria,Europe,Eastern Europe,"8,579","8,463","8,609","8,223"
+Czechoslovakia,Europe,Eastern Europe,"87,020","112,707","160,899","227,618"
+Estonia,Europe,Eastern Europe,"9,210","12,169","12,163","13,991"
+Hungary,Europe,Eastern Europe,"110,337","144,368","183,236","245,252"
+Latvia,Europe,Eastern Europe,"26,179","34,349","41,707","50,681"
+Lithuania,Europe,Eastern Europe,"29,745","48,194","76,001","121,475"
+Poland,Europe,Eastern Europe,"388,328","418,128","548,107","747,750"
+Romania,Europe,Eastern Europe,"91,106","66,994","70,687","84,575"
+Soviet Union,Europe,Eastern Europe,"333,725","406,022","463,462","690,598"
+Yugoslavia,Europe,Eastern Europe,"141,516","152,967","153,745","165,798"
+Europe n.e.c.,Europe,Eastern Europe,"6,037","16,768","20,700","14,320"
+China 1/,Asia,Eastern Asia,"529,837","286,120","172,132","99,735"
+Hong Kong,Asia,Eastern Asia,"147,131","80,380",0,0
+Japan,Asia,Eastern Asia,"290,128","221,794","120,235","109,175"
+Korea (total),Asia,Eastern Asia,"568,397","289,885","38,711","11,171"
+Macau,Asia,Eastern Asia,"5,107","2,959",0,0
+Taiwan 1/,Asia,Eastern Asia,"244,102","75,353",0,0
+Afghanistan,Asia,South Central Asia,"28,444","3,760",0,0
+Bangladesh,Asia,South Central Asia,"21,414","4,989",0,0
+India,Asia,South Central Asia,"450,406","206,087","51,000","12,296"
+Iran,Asia,South Central Asia,"210,941","121,505",0,0
+Nepal,Asia,South Central Asia,"2,262",844,0,0
+Pakistan,Asia,South Central Asia,"91,889","30,774","6,182","1,708"
+Sri Lanka,Asia,South Central Asia,"14,022","5,576",0,0
+Burma,Asia,South Eastern Asia,"19,835","11,236",0,0
+Cambodia,Asia,South Eastern Asia,"118,833","20,175",0,0
+Indonesia,Asia,South Eastern Asia,"48,387","29,920",0,0
+Laos,Asia,South Eastern Asia,"171,577","54,881",0,0
+Malaysia,Asia,South Eastern Asia,"33,834","10,473",0,0
+Philippines,Asia,South Eastern Asia,"912,674","501,440","184,842","104,843"
+Singapore,Asia,South Eastern Asia,"12,889","5,598",0,0
+Thailand,Asia,South Eastern Asia,"106,919","54,803",0,0
+Vietnam,Asia,South Eastern Asia,"543,262","231,120",0,0
+Cyprus,Asia,Western Asia,"10,060","8,806",0,0
+Iraq,Asia,Western Asia,"44,916","32,121",0,0
+Israel,Asia,Western Asia,"86,048","66,961","35,858","17,724"
+Jordan,Asia,Western Asia,"31,871","21,587",0,0
+Kuwait,Asia,Western Asia,"8,889","4,337",0,0
+Lebanon,Asia,Western Asia,"86,369","52,674","22,396","22,217"
+Palestine,Asia,Western Asia,"21,070",0,0,0
+Saudi Arabia,Asia,Western Asia,"12,632","17,317",0,0
+Syria,Asia,Western Asia,"36,782","22,081","14,962","16,717"
+Turkey,Asia,Western Asia,"55,087","51,915","48,085","52,228"
+United Arab Emirates,Asia,Western Asia,"1,656",534,0,0
+Yemen,Asia,Western Asia,"4,933","3,093",0,0
+Middle East n.e.c.,Asia,Western Asia,0,0,"52,752","23,811"
+Asia n.e.c.,Asia,Western Asia,"6,434","8,679","77,732","19,371"
+Ethiopia,Africa,Eastern Africa,"34,805","7,516",0,0
+Kenya,Africa,Eastern Africa,"14,371","6,250",0,0
+Somalia,Africa,Eastern Africa,"2,437",691,0,0
+Tanzania,Africa,Eastern Africa,"6,282","3,246",0,0
+Uganda,Africa,Eastern Africa,"6,684","3,804",0,0
+Zambia,Africa,Eastern Africa,"2,954","1,346",0,0
+Zimbabwe,Africa,Eastern Africa,"4,767","3,183",0,0
+Angola,Africa,Middle Africa,"2,252","1,094",0,0
+Cameroon,Africa,Middle Africa,"3,161","1,214",0,0
+Zaire,Africa,Middle Africa,"3,387","1,411",0,0
+Algeria,Africa,Northern Africa,"4,629","3,853",0,0
+Egypt,Africa,Northern Africa,"66,313","43,424","20,666","8,316"
+Libya,Africa,Northern Africa,"4,037","6,427",0,0
+Morocco,Africa,Northern Africa,"15,541","9,896",0,0
+Sudan,Africa,Northern Africa,"4,423","2,711",0,0
+Tunisia,Africa,Northern Africa,"4,101","3,466",0,0
+Northern Africa n.e.c.,Africa,Northern Africa,0,0,"11,730","7,587"
+South Africa,Africa,Southern Africa,"34,707","16,103","7,667","5,394"
+Cape Verde 2/,Africa,Western Africa,"14,368","10,457","18,680","8,302"
+Ghana,Africa,Western Africa,"20,889","7,564",0,0
+Liberia,Africa,Western Africa,"11,455","3,728",0,0
+Nigeria,Africa,Western Africa,"55,350","25,528",0,0
+Senegal,Africa,Western Africa,"2,287",762,0,0
+Sierra Leone,Africa,Western Africa,"7,217","1,963",0,0
+Africa n.e.c.,Africa,Western Africa,"37,402","34,086","21,400","5,756"
+Australia and New Zealand,Oceania,,"57,682","47,533","32,388","28,035"
+Australia,Oceania,,"42,267","36,120","24,271","22,209"
+New Zealand,Oceania,,"15,415","11,413","8,117","5,826"
+Pacific Islands,Oceania,,"46,463","30,044","8,870","6,695"
+Fiji,Oceania,,"15,935","7,538",0,0
+Tonga,Oceania,,"10,668","5,619",0,0
+Western Samoa,Oceania,,"11,408","12,582",0,0
+Other Pacific Islands,Oceania,,"8,452","4,305",0,0
+Antigua & Barbuda,North America,Latin America,"12,022","3,920",0,0
+Aruba,North America,Latin America,"3,363","2,597",0,0
+Bahamas,North America,Latin America,"21,633","13,993",0,0
+Barbados,North America,Latin America,"43,015","26,847",0,0
+Cuba,North America,Latin America,"736,971","607,814","439,048","79,150"
+Dominica,North America,Latin America,"19,529","3,296",0,0
+Dominican Republic,North America,Latin America,"347,858","169,147","61,228","11,883"
+Grenada,North America,Latin America,"17,730","7,101",0,0
+Haiti,North America,Latin America,"225,393","92,395","28,026","4,816"
+Jamaica,North America,Latin America,"334,140","196,811","68,576","24,759"
+Montserrat,North America,Latin America,"3,493","1,212",0,0
+Netherlands Antilles,North America,Latin America,"3,426","5,123",0,0
+St. Kitts-Nevis,North America,Latin America,"7,447","1,903",0,0
+St. Lucia,North America,Latin America,"6,959","1,901",0,0
+St. Vincent & the Grenadines,North America,Latin America,"12,824","4,044",0,0
+Trinidad & Tobago,North America,Latin America,"115,710","65,907","20,673",0
+West Indies n.e.c.,North America,Latin America,"18,509",0,"57,557","73,314"
+Other,North America,Latin America,"8,326","54,352",0,0
+Mexico,North America,Central America,"4,298,014","2,199,221","759,711","575,902"
+Belize,North America,Central America,"29,957","14,436","8,860","2,780"
+Costa Rica,North America,Central America,"43,530","29,639","16,691","5,425"
+El Salvador,North America,Central America,"465,433","94,447","15,717","6,310"
+Guatemala,North America,Central America,"225,739","63,073","17,356","5,381"
+Honduras,North America,Central America,"108,923","39,154","19,118","6,503"
+Nicaragua,North America,Central America,"168,659","44,166","16,125","9,474"
+Panama,North America,Central America,"85,737","60,740","20,046","13,076"
+Central America n.e.c.,North America,Central America,"6,000","8,237",0,0
+Argentina,South America,,"92,563","68,887","44,803","16,579"
+Bolivia,South America,,"31,303","14,468","6,872","2,168"
+Brazil,South America,,"82,489","40,919","27,069","13,988"
+Chile,South America,,"55,681","35,127","15,393","6,259"
+Colombia,South America,,"286,124","143,508","63,538","12,582"
+Ecuador,South America,,"143,314","86,128","36,663","7,670"
+Guyana,South America,,"120,698","48,608",0,0
+Paraguay,South America,,"6,057","2,858",0,595
+Peru,South America,,"144,199","55,496","21,663","7,102"
+Suriname,South America,,"2,860","1,433",0,0
+Uruguay,South America,,"20,766","13,278","5,092","1,170"
+Venezuela,South America,,"42,119","33,281","11,348","6,851"
+South America n.e.c.,South America,,"9,324","17,020","22,797","14,572"
+Canada,North America,Northern America,"744,830","842,859","812,421","952,500"
+Bermuda,North America,Northern America,"7,972","8,844",0,0
+Northern America n.e.c.,North America,Northern America,"1,115","1,724",0,0
+total,,,"21,638,072","16,024,822","12,214,322","13,251,959"
