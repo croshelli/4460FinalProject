@@ -48,9 +48,29 @@ console.log(data);
  var yAxis = d3.svg.axis()
 				.scale(yScale)
 				.orient("left");
+				
+var color = d3.scale.category20();
+				
+var area = d3.svg.area()
+	.x(function(d) {return xScale(d.date); })
+	.y0(function(d) {return yScale(d.y0);})
+	.y(function(d) {return yScale(d.y0+d.y);});
 	
+var stack = d3.layout.stack()
+				.values(function(d) {return d.values;});
 	
-	
+var canvas = d3.select("body").append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+canvas.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0,"+ height + ")")
+		.call(xAxis);
+canvas.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
 	
 	
 	}
