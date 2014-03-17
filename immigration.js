@@ -9,7 +9,7 @@ var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 
 
-d3.csv("ForeignBornPopulation1960_1990.csv", function(data){
+d3.csv("testCSV.csv", function(data){
 		createGraphic(data);
 	});
 
