@@ -2,20 +2,18 @@
 
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
-var margin = {top:40, right:20, bottom: 30, left:40};
+var margin = {top:40, right:20, bottom: 30, left:90};
 var width = 1000-margin.left-margin.right;
 var height = 500-margin.top-margin.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 
 
-d3.csv("testCSV.csv", function(data){
-		createGraphic(data);
+d3.csv("testCSV.csv", function(error, data){
+	createGraphic(data);
 	});
-
 function createGraphic(data){
 
-console.log(data);
 //load the data for the graphic
 /*d3.csv("", function(data){
 		data.forEach(function(d){
@@ -30,13 +28,13 @@ console.log(data);
 	});*/
 	
 
-
 //create scales for x axis (time) and y axis (dependent on variable)	
  var xScale = d3.time.scale()
 				.range([0, width]);
 				
  var yScale = d3.scale.linear()
-				.range([height, 0]);
+				.range([height, 0])
+				.domain([0, 12000000]) ;
 	
  //create x and y axis
  var xAxis = d3.svg.axis()
@@ -58,19 +56,62 @@ var area = d3.svg.area()
 	
 var stack = d3.layout.stack()
 				.values(function(d) {return d.values;});
-	
+
 var canvas = d3.select("body").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
+			.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+				
+color.domain(d3.keys(data[0]).filter(function(key) {return key !== "date";}));
+data.forEach(function(d){
+	year= +d.date;
+	nDate= new Date(year, 1,15);			
+	d.date = nDate;
+
+	});
+
+var countries = stack(color.domain().map(function(name) {
+				return {
+					name: name,
+					values: data.map(function(d){
+						return {date: d.date, y: d[name]};
+						})
+						};
+					}));
+
+xScale.domain(d3.extent(data, function(d) { return d.date;}));
+
+var country = canvas.selectAll(".country")
+					.data(countries)
+					.enter()
+						.append("g")
+						.attr("class", "country");
+
+country.append("path")
+		.attr("class", "area")
+		.attr("d", function(d) { return area(d.values);})
+		.style("fill", function(d) {return color(d.name);});
+		
+
+				
 canvas.append("g")
 		.attr("class", "x axis")
 		.attr("transform", "translate(0,"+ height + ")")
 		.call(xAxis);
+		
 canvas.append("g")
 		.attr("class", "y axis")
 		.call(yAxis);
-	
+
+		
+function getDate(d){
+	return function(d){
+		year = +d;
+		console.log(year);
+		return (new Date(year, 0,1));
+		};}
+		
 	
 	}
