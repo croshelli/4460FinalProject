@@ -14,19 +14,9 @@ d3.csv("testCSV.csv", function(error, data){
 	});
 function createGraphic(data){
 
-//load the data for the graphic
-/*d3.csv("", function(data){
-		data.forEach(function(d){
-			//load in data
-			d.Country = d.Country;
-			d.Continent = d.Continent;
-			d.Region = d.Region;
-			d.yr_1990 = +d.yr_1990;
-			d.yr_1980 = +d.yr_1980;
-			d.yr_1970 = +d.yr_1970;
-			d.yr_1960 = +d.yr_1960;
-	});*/
-	
+var currY0= 0;
+var prevY0 = 0;
+
 
 //create scales for x axis (time) and y axis (dependent on variable)	
  var xScale = d3.time.scale()
@@ -52,8 +42,17 @@ var color = d3.scale.category20();
 				
 var area = d3.svg.area()
 	.x(function(d) {return xScale(d.date); })
-	.y0(function(d) {return yScale(d.y0);})
-	.y(function(d) {return yScale(d.y0+d.y);});
+	.y0(function(d) {
+		currY0=prevY0;
+		console.log("curr " + currY0);
+		prevY0=d.y0+d.y;
+		console.log("prev " + prevY0);
+		return yScale(currY0);})
+	.y1(function(d) {
+		var y0= parseFloat(d.y0);
+		var y= parseFloat(d.y);
+		var sum= y0+y;
+		return yScale(sum);});
 	
 
 var stack = d3.layout.stack()
@@ -62,6 +61,7 @@ var stack = d3.layout.stack()
 var canvas = d3.select("body").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
+				.attr("overflow", "visible")
 			.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -74,17 +74,23 @@ data.forEach(function(d){
 
 	});
 
+
 var countries = stack(color.domain().map(function(name) {
 				return {
 					name: name,
 					values: data.map(function(d){
 						return {date: d.date, y: d[name]};
+						
 						})
 						};
 					}));
 					
-		
-
+countries.forEach(function(d){
+		d.values.forEach(function(d){
+			d.y= parseFloat(d.y);
+			d.y0= parseFloat(d.y0);
+			})});
+console.log(countries);
 var country = canvas.selectAll(".country")
 					.data(countries)
 					.enter()
@@ -94,7 +100,6 @@ var country = canvas.selectAll(".country")
 country.append("path")
 		.attr("class", "area")
 		.attr("d", function(d) { 
-			console.log(area(d.values));
 			return area(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 		
