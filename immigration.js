@@ -42,12 +42,7 @@ var color = d3.scale.category20();
 				
 var area = d3.svg.area()
 	.x(function(d) {return xScale(d.date); })
-	.y0(function(d) {
-		currY0=prevY0;
-		console.log("curr " + currY0);
-		prevY0=d.y0+d.y;
-		console.log("prev " + prevY0);
-		return yScale(currY0);})
+	.y0(function(d) {return yScale(d.y0);})
 	.y1(function(d) {
 		var y0= parseFloat(d.y0);
 		var y= parseFloat(d.y);
@@ -79,7 +74,7 @@ var countries = stack(color.domain().map(function(name) {
 				return {
 					name: name,
 					values: data.map(function(d){
-						return {date: d.date, y: d[name]};
+						return {date: d.date, y: d[name], prevY: 0};
 						
 						})
 						};
@@ -89,6 +84,8 @@ countries.forEach(function(d){
 		d.values.forEach(function(d){
 			d.y= parseFloat(d.y);
 			d.y0= parseFloat(d.y0);
+			d.prevY=d.y0;
+			d.y0=d.y+d.prevY;
 			})});
 console.log(countries);
 var country = canvas.selectAll(".country")
