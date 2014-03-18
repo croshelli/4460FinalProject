@@ -30,6 +30,7 @@ function createGraphic(data){
 
 //create scales for x axis (time) and y axis (dependent on variable)	
  var xScale = d3.time.scale()
+				.domain([new Date(1820, 0,1), new Date(2010, 11, 30)])
 				.range([0, width]);
 				
  var yScale = d3.scale.linear()
@@ -54,6 +55,7 @@ var area = d3.svg.area()
 	.y0(function(d) {return yScale(d.y0);})
 	.y(function(d) {return yScale(d.y0+d.y);});
 	
+
 var stack = d3.layout.stack()
 				.values(function(d) {return d.values;});
 
@@ -80,8 +82,8 @@ var countries = stack(color.domain().map(function(name) {
 						})
 						};
 					}));
-
-xScale.domain(d3.extent(data, function(d) { return d.date;}));
+					
+		
 
 var country = canvas.selectAll(".country")
 					.data(countries)
@@ -91,10 +93,17 @@ var country = canvas.selectAll(".country")
 
 country.append("path")
 		.attr("class", "area")
-		.attr("d", function(d) { return area(d.values);})
+		.attr("d", function(d) { 
+			console.log(area(d.values));
+			return area(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 		
-
+country.append("text")
+		.datum(function(d) {return {name: d.name, value: d.values[d.values.length - 1]};})
+		.attr("transform", function(d) { return "translate(" + xScale(d.value.date) + "," + yScale(d.value.y0 +d.value.y/2)+ ")";})
+		.attr("x", -6)
+		.attr("dy", ".35em")
+		.text(function(d) { return d.name;});
 				
 canvas.append("g")
 		.attr("class", "x axis")
