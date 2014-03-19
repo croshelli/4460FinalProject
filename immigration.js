@@ -86,7 +86,7 @@ var countries = stack(color.domain().map(function(name) {
 				return {
 					name: name,
 					values: data.map(function(d){
-						return {date: d.date, y: d[name]/*, prevY: 0*/};
+						return {date: d.date, y: parseFloat(d[name])/*, prevY: 0*/};
 						
 						})
 						};
@@ -112,7 +112,7 @@ var country = canvas.selectAll(".country")
 					.enter()
 						.append("g")
 						.attr("class", "country");
-
+							
 //append to each country a path that should create a line based off of 
 //the values of data in that country and what the area function returns for it
 // gives the path color based off of the color function
@@ -120,7 +120,13 @@ country.append("path")
 		.attr("class", "area")
 		.attr("d", function(d) { 
 			return area(d.values);})
-		.style("fill", function(d) {return color(d.name);});
+		.style("fill", function(d) {return color(d.name);})
+			.on("mouseover",function(d){
+				d3.select(this).attr("stroke", "black").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
+			.on("mouseout", function(d){
+				d3.select(this).attr("stroke-width", 0).style("fill", function(d){return color(d.name);});});
+				
+
 
 // this just adds text to each country's path saying what country it is		
 country.append("text")
