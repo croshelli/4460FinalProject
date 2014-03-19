@@ -94,13 +94,15 @@ var countries = stack(color.domain().map(function(name) {
 
 //this code here makes d.y and d.y0 floats, and introduces a third variable, prevY to keep track of what
 //the d.y0 should be. d.y0 is now set as the top height					
-/*countries.forEach(function(d){
+countries.forEach(function(d){
 		d.values.forEach(function(d){
 			d.y= parseFloat(d.y);
+			console.log(d.y);
 			d.y0= parseFloat(d.y0);
-			d.prevY=d.y0;
-			d.y0=d.y+d.prevY;
-			})});*/
+			console.log(d.y0);
+			//d.prevY=d.y0;
+			//d.y0=d.y+d.prevY;
+			})});
 			
 console.log(countries);
 
