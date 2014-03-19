@@ -3,87 +3,164 @@ d3.csv("testCSV.csv", function(error, data){
 createMap(data);
 
 }); 
-
+var bombMap;
+var europeColor = '#9467bd';
+var africaColor = '';
+var southAmericaColor = '';
+var northAmericaColor = '';
+var asiaColor = '#ff0000';
+var austrailaColor = '';
 
 function createMap(data){
 	data.forEach(function(d){
-		console.log(d.Africa);
+		d.Africa;
 	});
-	var bombMap = new Datamap({
-		element: document.getElementById('container'),
-		scope: 'world',
-		geographyConfig: {
-			popupOnHover: true,
-			highlightOnHover: true
-		},
-  
-		fills: {
-			'USA': '#9467bd',
-			'RUS': '#9467bd',
-			'PRK': '#ff7f0e',
-			'PRC': '#2ca02c',
-			'IND': '#e377c2',
-			'GBR': '#8c564b',
-			'FRA': '#d62728',
-			'PAK': '#7f7f7f',
-			defaultFill: '#80397b'
-		},
-		data: {
-			'RUS': {fillKey: 'RUS'},
-			'PRK': {fillKey: 'PRK'},
-			'PRC': {fillKey: 'PRC'},
-			'IND': {fillKey: 'IND'},
-			'GBR': {fillKey: 'GBR'},
-			'FRA': {fillKey: 'FRA'},
-			'PAK': {fillKey: 'PAK'},
-			'USA': {fillKey: 'USA'}
-		}
+	redrawMap(0,0,0,0,150);
+	bubbles();
+	console.log(bombMap);
+	bombMap.svg.selectAll('.datamaps-bubble').on('click', function() {
+		redrawMap(0,0,0,0,400);
 	});
 
-		 var bombs = [{
-			name: 'Joe 4',
-			radius: 25,
-			yeild: 400,
-			country: 'USSR',
-			fillKey: 'RUS',
-			significance: 'First fusion weapon test by the USSR (not "staged")',
-			date: '1953-08-12',
-			latitude: 50.07,
-			longitude: 78.43
-		  },{
-			name: 'RDS-37',
-			radius: 40,
-			yeild: 1600,
-			country: 'USSR',
-			fillKey: 'RUS',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
-			latitude: 50.07,
-			longitude: 78.43
+};	
 
-		  },{
-			name: 'Tsar Bomba',
-			radius: 75,
-			yeild: 50000,
-			country: 'USSR',
-			fillKey: 'RUS',
-			significance: 'Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%',
-			date: '1961-10-31',
-			latitude: 73.482,
-			longitude: 54.5854
-		  },{
-			name: 'Big Bomba',
-			radius: 75,
-			yeild: 50000,
-			country: 'USA',
-			fillKey: 'USA',
-			significance: 'Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%',
-			date: '1961-10-31',
-			latitude: 37.482,
-			longitude: 280.5854
-		  }
-		];
+	
+	function redrawMap(center1,center2,rotate1,rotate2,scale){
+		document.getElementById('container').innerHTML="";
+		bombMap = new Datamap({
+			
+			element: document.getElementById('container'),
+			scope: 'world',
+			geographyConfig: {
+				popupOnHover: true,
+				highlightOnHover: true
+			},
+			
+			setProjection: function(element) {
+				var projection = d3.geo.equirectangular()
+				.center([center1, center2])
+				.rotate([rotate1, rotate2])
+				.scale(scale)
+				.translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+				var path = d3.geo.path()
+				.projection(projection);
+				return {path: path, projection: projection}; 
+			},
+		
+			fills: {
+				'AUT': europeColor,
+				'HUN': europeColor,
+				'BEL': europeColor,
+				'BGR': europeColor,
+				'CZE': europeColor,
+				'DNK': europeColor,
+				'FIN': europeColor,
+				'FRA': europeColor,
+				'DEU': europeColor,
+				'GRC': europeColor,
+				'IRL': europeColor,
+				'ITA': europeColor,
+				'NLD': europeColor,
+				'NOR': europeColor,
+				'SWE': europeColor,
+				'POL': europeColor,
+				'PRT': europeColor,
+				'ROU': europeColor,
+				'RUS': europeColor,
+				'ESP': europeColor,
+				'CHE': europeColor,
+				'GBR': europeColor,
+				'MKD': europeColor,
+				'CHN': asiaColor,
+				'HKG': asiaColor,
+				'IND': asiaColor,
+				'IRN': asiaColor,
+				'ISR': asiaColor,
+				'JPN': asiaColor,
+				'JOR': asiaColor,
+				'KOR': asiaColor,
+				'PHL': asiaColor,
+				'SYR': asiaColor,
+				'TWN': asiaColor,
+				'TUR': asiaColor,
+				'VNM': asiaColor,
+				
+				'CDN': northAmericaColor,
+				'MEX': northAmericaColor,
+				'CUBA': northAmericaColor,
+				
+				
+				defaultFill: '#000000'
+			},
+			data: {
+				'AUT': {fillKey: 'AUT'},
+				'HUN': {fillKey: 'HUN'},
+				'BEL': {fillKey: 'BEL'},
+				'BGR': {fillKey: 'BGR'},
+				'CZE': {fillKey: 'CZE'},
+				'DNK': {fillKey: 'DNK'},
+				'FIN': {fillKey: 'FIN'},
+				'FRA': {fillKey: 'FRA'},
+				'DEU': {fillKey: 'DEU'},
+				'GRC': {fillKey: 'GRC'},
+				'IRL': {fillKey: 'IRL'},
+				'ITA': {fillKey: 'ITA'},
+				'NLD': {fillKey: 'NLD'},
+				'NOR': {fillKey: 'NOR'},
+				'SWE': {fillKey: 'SWE'},
+				'POL': {fillKey: 'POL'},
+				'PRT': {fillKey: 'PRT'},
+				'ROU': {fillKey: 'ROU'},
+				'RUS': {fillKey: 'RUS'},
+				'ESP': {fillKey: 'ESP'},
+				'CHE': {fillKey: 'CHE'},
+				'GBR': {fillKey: 'GBR'},
+				'MKD': {fillKey: 'MKD'},
+				'CHN': {fillKey: 'CHN'},
+				'HKG': {fillKey: 'HKG'},
+				'IND': {fillKey: 'IND'},
+				'IRN': {fillKey: 'IRN'},
+				'ISR': {fillKey: 'ISR'},
+				'JPN': {fillKey: 'JPN'},
+				'JOR': {fillKey: 'JOR'},
+				'KOR': {fillKey: 'KOR'},
+				'PHL': {fillKey: 'PHL'},
+				'SYR': {fillKey: 'SYR'},
+				'TWN': {fillKey: 'TWN'},
+				'TUR': {fillKey: 'TUR'},
+				'VNM': {fillKey: 'VNM'},
+				
+			}
+        
+		});
+
+	};
+function bubbles() {
 	//draw bubbles for bombs
+	var bombs = [{
+        name: 'Joe 4',
+        radius: 25,
+        yeild: 400,
+        country: 'USSR',
+        fillKey: 'RUS',
+        significance: 'First fusion weapon test by the USSR (not "staged")',
+        date: '1953-08-12',
+        latitude: 50.07,
+        longitude: 78.43
+      },{
+        name: 'RDS-37',
+        radius: 40,
+        yeild: 1600,
+        country: 'USSR',
+        fillKey: 'RUS',
+        significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+        date: '1955-11-22',
+        latitude: 50.07,
+        longitude: 200
+      }
+    ];
+	
+	
 	bombMap.bubbles(bombs, {
 		popupTemplate: function (geo, data) { 	
 				return ['<div class="hoverinfo">' +  data.name,
@@ -92,90 +169,7 @@ function createMap(data){
 				'<br/>Date: ' +  data.date + '',
 				'</div>'].join('');
 		}
+		
+	
 	});
-	function redrawMap(element){
-		var bombMap = new Datamap({
-			element: document.getElementById('container'),
-			scope: 'world',
-			geographyConfig: {
-				popupOnHover: true,
-				highlightOnHover: true
-			},
-			setProjection: function(element) {
-				var projection = d3.geo.equirectangular()
-				.center([23, -3])
-				.rotate([4.4, 0])
-				.scale(400)
-				.translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-				var path = d3.geo.path()
-				.projection(projection);
-				return {path: path, projection: projection}; 
-			},
-			fills: {
-				'USA': '#9467bd',
-				'RUS': '#9467bd',
-				'PRK': '#ff7f0e',
-				'PRC': '#2ca02c',
-				'IND': '#e377c2',
-				'GBR': '#8c564b',
-				'FRA': '#d62728',
-				'PAK': '#7f7f7f',
-				defaultFill: '#80397b'
-			},
-			data: {
-				'RUS': {fillKey: 'RUS'},
-				'PRK': {fillKey: 'PRK'},
-				'PRC': {fillKey: 'PRC'},
-				'IND': {fillKey: 'IND'},
-				'GBR': {fillKey: 'GBR'},
-				'FRA': {fillKey: 'FRA'},
-				'PAK': {fillKey: 'PAK'},
-				'USA': {fillKey: 'USA'}
-			}
-		});
-
-			 var bombs = [{
-				name: 'Joe 4',
-				radius: 25,
-				yeild: 400,
-				country: 'USSR',
-				fillKey: 'RUS',
-				significance: 'First fusion weapon test by the USSR (not "staged")',
-				date: '1953-08-12',
-				latitude: 50.07,
-				longitude: 78.43
-			  },{
-				name: 'RDS-37',
-				radius: 40,
-				yeild: 1600,
-				country: 'USSR',
-				fillKey: 'RUS',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
-				latitude: 50.07,
-				longitude: 78.43
-
-			  },{
-				name: 'Tsar Bomba',
-				radius: 75,
-				yeild: 50000,
-				country: 'USSR',
-				fillKey: 'RUS',
-				significance: 'Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%',
-				date: '1961-10-31',
-				latitude: 73.482,
-				longitude: 54.5854
-			  },{
-				name: 'Big Bomba',
-				radius: 75,
-				yeild: 50000,
-				country: 'USA',
-				fillKey: 'USA',
-				significance: 'Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%',
-				date: '1961-10-31',
-				latitude: 37.482,
-				longitude: 280.5854
-			  }
-			];
-		};
-	};
+};
