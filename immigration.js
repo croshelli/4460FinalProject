@@ -159,20 +159,28 @@ countries.forEach(function(d, i){
 				.style("stroke-width", 5)
 				.attr("stroke-opacity", 0)
 				.on("mouseover", function(d){
+					//changes stroke opacity of the line to make it show up while the user is exploring the map
 					d3.select(this).transition()
 								.attr("stroke-opacity", 1)
 								.duration(10);
+					//transition tooltip so that it appears where mouse is hovering
 					tooltip.transition()        
 						.duration(200)      
-						.style("opacity", 1);      
+						.style("opacity", 1);     
+						//prints out country, number of immigrants from that region and period of time over which immigration occured.
 					tooltip.html(currCountry + "<br/>"  + d.y + " Immigrants" + "<br/>" + "From "+(parseFloat(d.date.getFullYear())-10) + " to " + d.date.getFullYear())  
 						.style("left", (d3.event.pageX+5) + "px")     
 						.style("top", (d3.event.pageY - 28) + "px");			
 								})
+				//sets line and tooltip opacity to 0
 				.on("mouseout", function(d){
 					d3.select(this).transition()
 								.attr("stroke-opacity", 0)
-								.duration(10);});
+								.duration(10);
+					tooltip.transition()
+							.style("opacity", 0)
+							.duration(100);
+							});
 				});
 				
 
