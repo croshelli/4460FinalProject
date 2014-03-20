@@ -58,6 +58,10 @@ var canvas = d3.select("body").append("svg")
 			.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+//adding information for the tooltip
+var tooltip = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
 //this takes the color variable made above and maps its domain to the 8 different
 //headings in our .csv file (or the row called by data[0]), filtering out the first column, "date"				
@@ -133,6 +137,8 @@ country.append("text")
 
 countries.forEach(function(d, i){
 	var lineClass= function(d,i) { return "line" + i;};
+	var currCountry= d.name;
+	console.log(lineClass);
 	canvas.selectAll(lineClass)
 			.data(d.values)
 			.enter()
@@ -155,7 +161,14 @@ countries.forEach(function(d, i){
 				.on("mouseover", function(d){
 					d3.select(this).transition()
 								.attr("stroke-opacity", 1)
-								.duration(10);})
+								.duration(10);
+					tooltip.transition()        
+						.duration(200)      
+						.style("opacity", 1);      
+					tooltip.html(currCountry + "<br/>"  + d.y + " Immigrants" + "<br/>" + "From "+(parseFloat(d.date.getFullYear())-10) + " to " + d.date.getFullYear())  
+						.style("left", (d3.event.pageX+5) + "px")     
+						.style("top", (d3.event.pageY - 28) + "px");			
+								})
 				.on("mouseout", function(d){
 					d3.select(this).transition()
 								.attr("stroke-opacity", 0)
