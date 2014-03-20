@@ -7,6 +7,7 @@ var width = 1000-margin.left-margin.right;
 var height = 500-margin.top-margin.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
+var currLine=0;
 
 
 d3.csv("testCSV.csv", function(error, data){
@@ -127,16 +128,11 @@ country.append("path")
 				
 
 
-// this just adds text to each country's path saying what country it is		
-country.append("text")
-		.datum(function(d) {return {name: d.name, value: d.values[d.values.length - 1]};})
-		.attr("transform", function(d) {return "translate(" + xScale(d.value.date) + "," + yScale(d.value.y0 +d.value.y/2)+ ")";})
-		.attr("x", -6)
-		.attr("dy", ".35em")
-		.text(function(d) { return d.name;});
 
+//adds the DoD lines and tooltips
 countries.forEach(function(d, i){
-	var lineClass= function(d,i) { return "line" + i;};
+	var lineClass= "line" + currLine;
+	currLine++;
 	var currCountry= d.name;
 	console.log(lineClass);
 	canvas.selectAll(lineClass)
@@ -183,7 +179,7 @@ countries.forEach(function(d, i){
 							});
 				});
 				
-
+currLine=0;
 
 // append the x and y axis to the canvas.		
 canvas.append("g")
