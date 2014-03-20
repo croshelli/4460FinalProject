@@ -43,11 +43,7 @@ var color = d3.scale.category20();
 var area = d3.svg.area()
 	.x(function(d) {return xScale(d.date); })
 	.y0(function(d) {return yScale(d.y0);})
-	.y1(function(d) {
-		//var y0= parseFloat(d.y0);
-		//var y= parseFloat(d.y);
-		//var sum= y0+y;
-		return yScale(d.y0+d.y);});
+	.y1(function(d) {return yScale(d.y0+d.y);});
 	
 
 //this creates a stack layout with the array stored in d.values
@@ -86,7 +82,7 @@ var countries = stack(color.domain().map(function(name) {
 				return {
 					name: name,
 					values: data.map(function(d){
-						return {date: d.date, y: parseFloat(d[name])/*, prevY: 0*/};
+						return {date: d.date, y: parseFloat(d[name]), y0: 0};
 						
 						})
 						};
@@ -97,14 +93,13 @@ var countries = stack(color.domain().map(function(name) {
 countries.forEach(function(d){
 		d.values.forEach(function(d){
 			d.y= parseFloat(d.y);
-			console.log(d.y);
 			d.y0= parseFloat(d.y0);
-			console.log(d.y0);
-			//d.prevY=d.y0;
-			//d.y0=d.y+d.prevY;
 			})});
+
+
+				
 			
-console.log(countries);
+//console.log(countries);
 
 //create a country object for every country in the array countries
 var country = canvas.selectAll(".country")
@@ -121,10 +116,10 @@ country.append("path")
 		.attr("d", function(d) { 
 			return area(d.values);})
 		.style("fill", function(d) {return color(d.name);})
-			.on("mouseover",function(d){
+			/*.on("mouseover",function(d){
 				d3.select(this).attr("stroke", "black").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
 			.on("mouseout", function(d){
-				d3.select(this).attr("stroke-width", 0).style("fill", function(d){return color(d.name);});});
+				d3.select(this).attr("stroke-width", 0).style("fill", function(d){return color(d.name);});})*/;
 				
 
 
@@ -135,6 +130,38 @@ country.append("text")
 		.attr("x", -6)
 		.attr("dy", ".35em")
 		.text(function(d) { return d.name;});
+
+countries.forEach(function(d, i){
+	var lineClass= function(d,i) { return "line" + i;};
+	canvas.selectAll(lineClass)
+			.data(d.values)
+			.enter()
+				.append("line")
+				.attr("class", lineClass)
+				.attr("x1", function(d) {return xScale(d.date);})
+				.attr("x2", function(d) { return xScale(d.date);})
+				.attr("y1", function(d) { return yScale(d.y0);})
+				.attr("y2", function(d) {
+					if(d.y >0){
+					return yScale(d.y + d.y0);
+					}
+					else{
+						return yScale(d.y0);
+						}})
+				//.attr("class", ".infoLine")
+				.attr("stroke", "black")
+				.style("stroke-width", 5)
+				.attr("stroke-opacity", 0)
+				.on("mouseover", function(d){
+					d3.select(this).transition()
+								.attr("stroke-opacity", 1)
+								.duration(10);})
+				.on("mouseout", function(d){
+					d3.select(this).transition()
+								.attr("stroke-opacity", 0)
+								.duration(10);});
+				});
+				
 
 
 // append the x and y axis to the canvas.		
