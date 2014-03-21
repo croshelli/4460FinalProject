@@ -70,11 +70,8 @@ var stack = d3.layout.stack()
 //this is the svg canvas we will draw to
 var canvas = d3.select("body").append("svg")
 				.attr("width", width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
-				.attr("overflow", "visible")
-			//.append("g")
-				//.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+				.attr("height", height + margin.top + margin.bottom);
+				
 //adding information for the tooltip
 var tooltip = d3.select("body").append("div")   
     .attr("class", "tooltip")               
@@ -83,7 +80,7 @@ var tooltip = d3.select("body").append("div")
 canvas.append("defs").append("clipPath")
 		.attr("id", "clip")
 		.append("rect")
-			.attr("width", width)
+			.attr("width", width-50)
 			.attr("height", height);
 
 var focus = canvas.append("g")
@@ -169,7 +166,7 @@ countries.forEach(function(d, i){
 	currLine++;
 	var currCountry= d.name;
 	console.log(lineClass);
-	canvas.selectAll(lineClass)
+	focus.selectAll(lineClass)
 			.data(d.values)
 			.enter()
 				.append("line")
@@ -227,7 +224,7 @@ focus.append("g")
 
 context.append("g")
 		.attr("class", "x axis")
-		.attr("transform", "translate( 0" + height2 + ")")
+		.attr("transform", "translate( 0," + height2 + ")")
 		.call(xAxis2);
 		
 function getDate(d){
