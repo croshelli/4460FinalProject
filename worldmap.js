@@ -10,32 +10,19 @@ var southAmericaColor = '';
 var northAmericaColor = '';
 var asiaColor = '#ff0000';
 var austrailaColor = '';
-var p0 = [500,300,600]
+
+var worldMapPos = [500,300,600];
+var northAmericaPos = [255,200,200];
+var p0 = worldMapPos;
+var p1 = northAmericaPos;
+var temp;
 
 function createMap(data){
 	data.forEach(function(d){
 		d.Africa;
 	});
-	redrawMap(0,0,0,0,150);
+	redrawMap(0,0,0,0,150);	
 	bubbles();
-	console.log(bombMap);
-	bombMap.svg.selectAll('.datamaps-bubble').on('click', function() {
-		//redrawMap(0,0,0,0,400);
-		p1 = [100,100,250];
-		bombMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
-		p0 = p1;
-		
-		bombMap.svg.select('.datamaps-bubble').selectAll("circle")
-		.transition()
-		.attr("opacity",0)
-		.delay(0)
-		.duraction(1000)
-
-	});
-
-	
-	
-	
 };	
 
 function transition(svg, start, end) {
@@ -48,8 +35,11 @@ function transition(svg, start, end) {
       .delay(250)
       .duration(i.duration * 2)
       .attrTween("transform", function() { return function(t) { return transform(i(t)); }; })
-      //.each("end", function() { d3.select(this).call(transition, end, start); });
-
+      .each("end", function() { bubbles(); });
+		
+	temp = p0;
+	p0=p1;
+	p1=temp;
   function transform(p) {
     var k = 600 / p[2];
     return "translate(" + (center[0] - p[0] * k) + "," + (center[1] - p[1] * k) + ")scale(" + k + ")";
@@ -187,10 +177,12 @@ function bubbles() {
         fillKey: 'RUS',
         significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
         date: '1955-11-22',
-        latitude: 50.07,
-        longitude: 200
+        latitude: 0,
+        longitude: -100
       }
     ];
+	
+	
 	
 	
 	bombMap.bubbles(bombs, {
@@ -204,4 +196,21 @@ function bubbles() {
 		
 	
 	});
-};
+
+	bombMap.svg.selectAll('.datamaps-bubble').on('click', function() {
+			
+			bombMap.svg.selectAll('circle').forEach(function(d) {
+				d.forEach(function(d1) {
+					d1.remove();
+				});
+			
+			});		
+		
+		
+		
+		bombMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
+		
+	
+	});
+	
+	};
