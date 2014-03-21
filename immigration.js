@@ -12,11 +12,9 @@ var frameRight = 1000-margin.right;
 var currLine=0;
 var currLine2=0;
 var currValue=0;
+var countrySelection = "all";
 
-
-d3.csv("testEurope.csv", function(error, data){
-	createGraphic(data);
-	});
+onCountrySelection(countrySelection);
 function createGraphic(data){
 
 
@@ -138,7 +136,14 @@ country.append("path")
 		.attr("class", "area")
 		.attr("d", function(d) { 
 			return area(d.values);})
-		.style("fill", function(d) {return color(d.name);});
+		.style("fill", function(d) {return color(d.name);})
+		.on("mouseover", function(d) {
+		    console.log(d.name);
+			d3.select(this).attr("stroke", "black").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
+		.on("click", function(d){
+			console.log(d.name);
+			d3.select(this).transition().attr("opacity", 0).duration(1000);
+			onCountrySelection(d.name);});
 			
 var country2 = context.selectAll(".country2")
 				.data(countries)
@@ -267,3 +272,29 @@ function brushed(){
 //figureout how to redraw using different datasets	
 	
 	}
+	
+function onCountrySelection(countryName){
+	
+	d3.select('svg').remove();
+	if(countryName == "Africa"){
+		d3.csv("testAfrica.csv", function(error, data){
+		createGraphic(data);
+		});
+		}
+	else if(countryName == "Europe"){
+		d3.csv("testEurope.csv", function(error, data){
+		createGraphic(data);
+		});
+		}
+	else if(countryName == "Asia"){
+		d3.csv("testAsia.csv", function(error, data){
+		createGraphic(data);
+		});
+		}
+	else {
+		d3.csv("testCSV.csv", function(error, data){
+		createGraphic(data);
+		});
+		}
+}
+	
