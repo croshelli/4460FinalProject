@@ -10,9 +10,11 @@ var height2 = 500 - margin2.top - margin2.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 var currLine=0;
+var currLine2=0;
+var currValue=0;
 
 
-d3.csv("testCSV.csv", function(error, data){
+d3.csv("testEurope.csv", function(error, data){
 	createGraphic(data);
 	});
 function createGraphic(data){
@@ -99,10 +101,11 @@ var context = canvas.append("g")
 //headings in our .csv file (or the row called by data[0]), filtering out the first column, "date"				
 color.domain(d3.keys(data[0]).filter(function(key) {return key !== "date";}));
 
+//get domains for scales
 xScale.domain(d3.extent(data.map(function(d) { return gd(d.date);})));
 xScale2.domain(xScale.domain());
 yScale2.domain(yScale.domain());
-
+//need to write function to update yScale domain
 
 
 // here, we take the domain of color, set above to be each of our continent names and
@@ -120,10 +123,6 @@ var countries = stack(color.domain().map(function(name) {
 						};
 					}));
 
-//this code here makes d.y and d.y0 floats, and introduces a third variable, prevY to keep track of what
-//the d.y0 should be. d.y0 is now set as the top height					
-
-
 
 //create a country object for every country in the array countries
 var country = focus.selectAll(".country")
@@ -131,7 +130,6 @@ var country = focus.selectAll(".country")
 					.enter()
 						.append("g")
 						.attr("class", "country");
-
 						
 //append to each country a path that should create a line based off of 
 //the values of data in that country and what the area function returns for it
@@ -140,17 +138,14 @@ country.append("path")
 		.attr("class", "area")
 		.attr("d", function(d) { 
 			return area(d.values);})
-		.style("fill", function(d) {return color(d.name);})
-			/*.on("mouseover",function(d){
-				d3.select(this).attr("stroke", "black").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
-			.on("mouseout", function(d){
-				d3.select(this).attr("stroke-width", 0).style("fill", function(d){return color(d.name);});})*/;
-				
+		.style("fill", function(d) {return color(d.name);});
+			
 var country2 = context.selectAll(".country2")
 				.data(countries)
 				.enter()
 					.append("g")
 					.attr("class", "country2");
+					
 country2.append("path")
 		.attr("class", "area")
 		.attr("d", function(d){
@@ -163,17 +158,40 @@ context.append("g")
 		.selectAll("rect")
 			.attr("y", -6)
 			.attr("height", height2+7);
-			
+
+
+			//call this to redraw the tooltips after brushing.
+function updateTooltips(){
+	countries.forEach(function(d,i){
+		var lineClass= ".line" + currLine2;
+		currLine2++;
+		currValue=0;
+		d.values.forEach(function(d,i){
+			currValue++;
+			d3.select(lineClass+currValue)
+				.transition()
+				.attr("x1", function(d){ return xScale(gd(d.date));})
+				.attr("x2", function(d) { return xScale(gd(d.date));});
+			});
+			});
+			currLine2=0;}
+		
+		
+		
+				
 //adds the DoD lines and tooltips
-var toolTipLines = countries.forEach(function(d, i){
+countries.forEach(function(d, i){
 	var lineClass= "line" + currLine;
 	currLine++;
 	var currCountry= d.name;
+	currValue=0;
 	focus.selectAll(lineClass)
 			.data(d.values)
 			.enter()
 				.append("line")
-				.attr("class", lineClass)
+				.attr("class", function(d){
+					currValue++;
+					return lineClass+currValue;})
 				.attr("x1", function(d) {return xScale(gd(d.date));})
 				.attr("x2", function(d) { return xScale(gd(d.date));})
 				.attr("y1", function(d) { return yScale(d.y0);})
@@ -241,12 +259,11 @@ function brushed(){
 	xScale.domain(brush.empty() ? xScale2.domain() : brush.extent());
 	country.select(".area").attr("d", function(d) {return area(d.values);});
 	focus.select(".x.axis").call(xAxis);
-	//focus.select("lineClass1").
+	updateTooltips();
 	}
 
 //to do list:
 //create function so that yscale is updated correctly
-//figure out how to update tooltips and lines
 //figureout how to redraw using different datasets	
 	
 	}
