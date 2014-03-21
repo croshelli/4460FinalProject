@@ -13,7 +13,15 @@ body {
 .browser text{
 	text-anchor: end;
 	}
-
+.area{
+	clip-path: url(#clip);
+	}
+.brush .extent{
+	stroke: #fff;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+	}
+	
 div.tooltip {   
   position: absolute;           
   text-align: center;           
