@@ -236,7 +236,7 @@ function getDate(d){
 		
 function brushed(){
 	xScale.domain(brush.empty() ? xScale2.domain() : brush.extent());
-	focus.select(".area").attr("d", function(d) {return area(d.values);});
+	country.select(".area").attr("d", function(d) {return area(d.values);});
 	focus.select(".x.axis").call(xAxis);
 	}
 	
