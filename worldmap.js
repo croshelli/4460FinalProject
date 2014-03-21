@@ -1,9 +1,4 @@
-d3.csv("testCSV.csv", function(error, data){
-
-createMap(data);
-
-}); 
-var bombMap;
+var theMap;
 var europeColor = '#9467bd';
 var africaColor = '';
 var southAmericaColor = '';
@@ -13,9 +8,26 @@ var austrailaColor = '';
 
 var worldMapPos = [500,300,600];
 var northAmericaPos = [255,200,200];
+var southAmericaPos = [255,1000,200];
+var centralAmericaPos = [];
+var europePos = [];
+var asiaPos = [1000,500,200];
+var africaPos = [];
+
+
 var p0 = worldMapPos;
 var p1 = northAmericaPos;
 var temp;
+
+var location1 = "World";
+
+
+d3.csv("testCSV.csv", function(error, data){
+
+createMap(data);
+
+}); 
+
 
 function createMap(data){
 	data.forEach(function(d){
@@ -31,7 +43,7 @@ function transition(svg, start, end) {
 
   svg
       .attr("transform", transform(start))
-    .transition()
+      .transition()
       .delay(250)
       .duration(i.duration * 2)
       .attrTween("transform", function() { return function(t) { return transform(i(t)); }; })
@@ -49,7 +61,7 @@ function transition(svg, start, end) {
 	
 	function redrawMap(center1,center2,rotate1,rotate2,scale){
 		document.getElementById('container').innerHTML="";
-		bombMap = new Datamap({
+		theMap = new Datamap({
 			
 			element: document.getElementById('container'),
 			scope: 'world',
@@ -158,34 +170,13 @@ function transition(svg, start, end) {
 
 	};
 function bubbles() {
-	//draw bubbles for bombs
-	var bombs = [{
-        name: 'Joe 4',
-        radius: 25,
-        yeild: 400,
-        country: 'USSR',
-        fillKey: 'RUS',
-        significance: 'First fusion weapon test by the USSR (not "staged")',
-        date: '1953-08-12',
-        latitude: 50.07,
-        longitude: 78.43
-      },{
-        name: 'RDS-37',
-        radius: 40,
-        yeild: 1600,
-        country: 'USSR',
-        fillKey: 'RUS',
-        significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-        date: '1955-11-22',
-        latitude: 0,
-        longitude: -100
-      }
-    ];
+	//draw bubbles for thes
+	var bubbs = mapSelect(location1);
 	
 	
 	
 	
-	bombMap.bubbles(bombs, {
+	theMap.bubbles(bubbs, {
 		popupTemplate: function (geo, data) { 	
 				return ['<div class="hoverinfo">' +  data.name,
 				'<br/>Payload: ' +  data.yeild + ' kilotons',
@@ -197,9 +188,10 @@ function bubbles() {
 	
 	});
 
-	bombMap.svg.selectAll('.datamaps-bubble').on('click', function() {
-			
-			bombMap.svg.selectAll('circle').forEach(function(d) {
+	theMap.svg.selectAll('.datamaps-bubble').on('click', function() {
+		location1 = this.__data__.country;
+		
+			theMap.svg.selectAll('circle').forEach(function(d) {
 				d.forEach(function(d1) {
 					d1.remove();
 				});
@@ -207,10 +199,62 @@ function bubbles() {
 			});		
 		
 		
-		
-		bombMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
+		locationSelect();
+		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		
 	
 	});
 	
 	};
+
+function locationSelect() {
+	if (location1=="World") {
+		p1 = worldMapPos;
+	}
+	else if (location1=="North America") {
+		p1 = northAmericaPos
+	}
+};	
+	
+function mapSelect() {
+	var bubbs;
+	if (location1=="World") {
+		bubbs = [{
+			name: 'Asia',
+			radius: 25,
+			yeild: 400,
+			country: 'North America',
+			fillKey: 'RUS',
+			significance: 'First fusion weapon test by the USSR (not "staged")',
+			date: '1953-08-12',
+			latitude: 50.07,
+			longitude: 78.43
+		  },{
+			name: 'North America',
+			radius: 40,
+			yeild: 1600,
+			country: 'North America',
+			fillKey: 'RUS',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: 0,
+			longitude: -100
+		  }
+		];
+	}
+	else if (location1=="North America") {
+		bubbs = [{
+			name: 'North America',
+			radius: 40,
+			yeild: 1600,
+			country: 'World',
+			fillKey: 'RUS',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: 0,
+			longitude: -100
+			}
+		];
+	}
+	return bubbs;
+};
