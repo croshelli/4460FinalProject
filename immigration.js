@@ -12,7 +12,7 @@ var frameRight = 1000-margin.right;
 var currLine=0;
 
 
-d3.csv("testCSV.csv", function(error, data){
+d3.csv("testCentralAmerica.csv", function(error, data){
 	createGraphic(data);
 	});
 function createGraphic(data){
@@ -80,7 +80,7 @@ var tooltip = d3.select("body").append("div")
 canvas.append("defs").append("clipPath")
 		.attr("id", "clip")
 		.append("rect")
-			.attr("width", width-50)
+			.attr("width", width)
 			.attr("height", height);
 
 var focus = canvas.append("g")
@@ -161,11 +161,10 @@ context.append("g")
 			.attr("height", height2+7);
 			
 //adds the DoD lines and tooltips
-countries.forEach(function(d, i){
+var toolTipLines = countries.forEach(function(d, i){
 	var lineClass= "line" + currLine;
 	currLine++;
 	var currCountry= d.name;
-	console.log(lineClass);
 	focus.selectAll(lineClass)
 			.data(d.values)
 			.enter()
@@ -238,7 +237,12 @@ function brushed(){
 	xScale.domain(brush.empty() ? xScale2.domain() : brush.extent());
 	country.select(".area").attr("d", function(d) {return area(d.values);});
 	focus.select(".x.axis").call(xAxis);
+	//focus.select("lineClass1").
 	}
-	
+
+//to do list:
+//create function so that yscale is updated correctly
+//figure out how to update tooltips and lines
+//figureout how to redraw using different datasets	
 	
 	}
