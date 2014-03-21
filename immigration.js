@@ -12,7 +12,7 @@ var frameRight = 1000-margin.right;
 var currLine=0;
 
 
-d3.csv("testCentralAmerica.csv", function(error, data){
+d3.csv("testCSV.csv", function(error, data){
 	createGraphic(data);
 	});
 function createGraphic(data){
@@ -45,6 +45,10 @@ function gd(year){
 	return nDate;
 }
 
+/*function getyDomain() {
+	countries.forEach( function(d,i){
+		nodes.
+*/
 var brush = d3.svg.brush()
 			.x(xScale2)
 			.on("brush", brushed);
