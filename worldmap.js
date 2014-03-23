@@ -8,11 +8,12 @@ var austrailaColor = '';
 
 var worldMapPos = [500,300,600];
 var northAmericaPos = [255,200,200];
-var southAmericaPos = [255,1000,200];
-var centralAmericaPos = [];
-var europePos = [];
-var asiaPos = [1000,500,200];
-var africaPos = [];
+var southAmericaPos = [300,350,200];
+var centralAmericaPos = [280,265,70];
+var europePos = [550,180,150];
+var asiaPos = [725,225,200];
+var africaPos = [550,300,200];
+var oceaniaPos = [850,350,150];
 
 
 var p0 = worldMapPos;
@@ -119,9 +120,11 @@ function transition(svg, start, end) {
 				'TUR': asiaColor,
 				'VNM': asiaColor,
 				
-				'CDN': northAmericaColor,
+				'CAN': northAmericaColor,
 				'MEX': northAmericaColor,
-				'CUBA': northAmericaColor,
+				'CUB': northAmericaColor,
+				'DOM': northAmericaColor,
+				
 				
 				
 				defaultFill: '#000000'
@@ -214,6 +217,24 @@ function locationSelect() {
 	else if (location1=="North America") {
 		p1 = northAmericaPos
 	}
+	else if (location1=="Asia") {
+		p1 = asiaPos
+	}
+	else if (location1=="Europe") {
+		p1 = europePos
+	}
+	else if (location1=="Africa") {
+		p1 = africaPos
+	}
+	else if (location1=="Oceania") {
+		p1 = oceaniaPos
+	}
+	else if (location1=="Central America") {
+		p1 = centralAmericaPos
+	}
+	else if (location1=="South America") {
+		p1 = southAmericaPos
+	}
 };	
 	
 function mapSelect() {
@@ -223,26 +244,76 @@ function mapSelect() {
 			name: 'Asia',
 			radius: 25,
 			yeild: 400,
-			country: 'North America',
-			fillKey: 'RUS',
+			country: 'Asia',
+			fillKey: 'JPN',
 			significance: 'First fusion weapon test by the USSR (not "staged")',
 			date: '1953-08-12',
-			latitude: 50.07,
+			latitude: 35.07,
 			longitude: 78.43
 		  },{
 			name: 'North America',
-			radius: 40,
+			radius: 25,
 			yeild: 1600,
 			country: 'North America',
-			fillKey: 'RUS',
+			fillKey: 'CAN',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: 40,
+			longitude: -100
+		  },{
+			name: 'South America',
+			radius: 25,
+			yeild: 1600,
+			country: 'South America',
+			fillKey: 'BRA',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: -20,
+			longitude: -60
+		  },{
+			name: 'Central America',
+			radius: 25,
+			yeild: 1600,
+			country: 'Central America',
+			fillKey: 'CRI',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: 10,
+			longitude: -85
+		  },{
+			name: 'Europe',
+			radius: 25,
+			yeild: 1600,
+			country: 'Europe',
+			fillKey: 'GBR',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: 50,
+			longitude: 0
+		  },{
+			name: 'Africa',
+			radius: 25,
+			yeild: 1600,
+			country: 'Africa',
+			fillKey: 'EGY',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 0,
-			longitude: -100
+			longitude: 20
+		  },{
+			name: 'Oceania',
+			radius: 25,
+			yeild: 1600,
+			country: 'Oceania',
+			fillKey: 'AUS',
+			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
+			date: '1955-11-22',
+			latitude: -30,
+			longitude: 140
 		  }
 		];
 	}
-	else if (location1=="North America") {
+	else if (location1) {
 		bubbs = [{
 			name: 'North America',
 			radius: 40,
