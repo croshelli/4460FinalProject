@@ -13,10 +13,10 @@ var currLine=0;
 var currLine2=0;
 var currValue=0;
 var countrySelection = "all";
+var cache = {};
 
-onCountrySelection(countrySelection);
+loadAllData();
 function createGraphic(data){
-
 
 //create scales for x axis (time) and y axis (dependent on variable)
 //also creates scales for focus and context bar.	
@@ -129,21 +129,29 @@ var country = focus.selectAll(".country")
 						.append("g")
 						.attr("class", "country");
 						
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////	
+/////////////////////////////////////////////////////////////////////////////////////////////////	
 //append to each country a path that should create a line based off of 
 //the values of data in that country and what the area function returns for it
 // gives the path color based off of the color function
 country.append("path")
 		.attr("class", "area")
-		.attr("d", function(d) { 
-			return area(d.values);})
-		.style("fill", function(d) {return color(d.name);})
-		.on("mouseover", function(d) {
-		    console.log(d.name);
-			d3.select(this).attr("stroke", "black").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
-		.on("click", function(d){
+		//////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
+		//for some reason, when I mouseover the countries, no change occurs....
+		.on("mouseover", function(d,i) {
+			d3.select(this).attr("stroke", "pink").attr("stroke-width", 1).style("fill", function(d) {return d3.rgb(color(d.name)).darker();});})
+		.on("click", function(d,i){
 			console.log(d.name);
 			d3.select(this).transition().attr("opacity", 0).duration(1000);
-			onCountrySelection(d.name);});
+			;})
+		//////////////////////////////////////////////////////////////////////////////////////	
+		/////////////////////////////////////////////////////////////////////////////////////////
+		.attr("d", function(d) { return area(d.values);})
+		.style("fill", function(d) {return color(d.name);})
+		.attr("stroke", "black")
+		.style("stroke-width", 2);
 			
 var country2 = context.selectAll(".country2")
 				.data(countries)
@@ -218,10 +226,10 @@ countries.forEach(function(d, i){
 								.duration(10);
 					//transition tooltip so that it appears where mouse is hovering
 					tooltip.transition()        
-						.duration(200)      
+						.duration(10)      
 						.style("opacity", 1);     
 						//prints out country, number of immigrants from that region and period of time over which immigration occured.
-					tooltip.html(currCountry + "<br/>"  + d.y + " Immigrants" + "<br/>" + "From "+(parseFloat(gd(d.date).getFullYear())-10) + " to " + gd(d.date).getFullYear())  
+					tooltip.html(currCountry + "<br/>"  + numFormat(d.y) + " Immigrants" + "<br/>" + "From "+(parseFloat(gd(d.date).getFullYear())-10) + " to " + gd(d.date).getFullYear())  
 						.style("left", (d3.event.pageX+5) + "px")     
 						.style("top", (d3.event.pageY - 28) + "px");			
 								})
@@ -229,7 +237,7 @@ countries.forEach(function(d, i){
 				.on("mouseout", function(d){
 					d3.select(this).transition()
 								.attr("stroke-opacity", 0)
-								.duration(10);
+								.duration(300);
 					tooltip.transition()
 							.style("opacity", 0)
 							.duration(100);
@@ -238,6 +246,7 @@ countries.forEach(function(d, i){
 				
 currLine=0;
 
+var numFormat = d3.format(",g");
 // append the x and y axis to the canvas.		
 focus.append("g")
 		.attr("class", "x axis")
@@ -273,28 +282,32 @@ function brushed(){
 	
 	}
 	
-function onCountrySelection(countryName){
-	
-	d3.select('svg').remove();
-	if(countryName == "Africa"){
+function loadAllData(){
 		d3.csv("testAfrica.csv", function(error, data){
-		createGraphic(data);
+			cache["Africa"] = data;
 		});
-		}
-	else if(countryName == "Europe"){
 		d3.csv("testEurope.csv", function(error, data){
-		createGraphic(data);
+			cache["Europe"]=data;
 		});
-		}
-	else if(countryName == "Asia"){
 		d3.csv("testAsia.csv", function(error, data){
-		createGraphic(data);
+			cache["Asia"]=data;;
 		});
-		}
-	else {
 		d3.csv("testCSV.csv", function(error, data){
-		createGraphic(data);
+			cache["All"]=data;
+			createGraphic(data);
 		});
+		d3.csv("testCentralAmerica.csv", function(error, data){
+			cache["Central America"]=data;
+		});
+		d3.csv("testOceania.csv", function(error, data){
+			cache["Oceania"]=data;
+		});
+		d3.csv("testSouthAmerica.csv", function(error, data){
+			cache["South America"]=data;
+		});
+		
+		
+		
 		}
-}
+	
 	
