@@ -9,9 +9,6 @@ var height = 500-margin.top-margin.bottom;
 var height2 = 500 - margin2.top - margin2.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
-var currLine=0;
-var currLine2=0;
-var currValue=0;
 var countrySelection = "all";
 var cache = {};
 var tooltipsArray = [];
@@ -162,6 +159,9 @@ country2.selectAll("path")
 		.attr("d", function(d){return area2(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 
+country2.exit().remove();
+
+		
 context.append("g")
 		.attr("class", "x brush")
 		.call(brush)
@@ -186,7 +186,10 @@ tooltips.enter()
 		.append("g")
 		.attr("class", "tooltipGroup")
 		.append("line")
-		.attr("class", "tooltip");
+		.attr("class", "tooltip")
+		.on("click", function(d){
+			console.log("clicked");
+			updatePaths(d.name);});
 
 tooltips.selectAll("line")
 			.attr("x1", function(d) {return xScale(gd(d.date));})
@@ -226,6 +229,9 @@ tooltips.selectAll("line")
 						.style("opacity", 0)
 						.duration(100);
 						});
+
+tooltips.exit().remove();
+
 				
 //call this to redraw the tooltips after brushing.
 function updateTooltips(){
@@ -239,6 +245,30 @@ function updateTooltips(){
 var numFormat = d3.format(",g");
 	
 	}
+	
+function updatePaths(name){
+	if (name == "Africa"){
+		createGraphic(cache["Africa"]);
+		}
+	else if(name == "Asia"){
+		createGraphic(cache["Asia"]);
+		}
+	else if(name == "Oceania"){
+		createGraphic(cache["Oceania"]);
+		}
+	else if(name == "Europe"){
+		createGraphic(cache["Europe"]);
+		}
+	else if(name == "Central America"){
+		createGraphic(cache["Central America"]);
+		}
+	else if(name == "South America"){
+		createGraphic(cache["South America"]);
+		}
+	else{
+		createGraphic(cache["All"]);
+		}
+		}
 	
 function loadAllData(){
 		d3.csv("testAfrica.csv", function(error, data){
