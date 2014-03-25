@@ -117,7 +117,10 @@ xScale.domain(d3.extent(data.map(function(d) { return gd(d.date);})));
 xScale2.domain(xScale.domain());
 yScale2.domain(yScale.domain());
 //need to write function to update yScale domain
-
+focus.select('.x.axis').transition()
+    .call(xAxis);
+context.select('.x.axis').transition()
+    .call(xAxis2);
 
 //take input data and format it into an array of countries objects
 var countries = stack(color.domain().map(function(name) {
