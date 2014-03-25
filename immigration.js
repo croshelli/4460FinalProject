@@ -14,7 +14,7 @@ var cache = {};
 var tooltipsArray = [];
 //create x and y scales and axis
 var xScale = d3.time.scale().range([0, width]);
-var yScale = d3.scale.linear().range([height, 0]).domain([0, 12000000]) ;
+var yScale = d3.scale.linear().range([height, 0]);
 var xScale2 = d3.time.scale().range([0, width]);
 var yScale2 = d3.scale.linear().range([height2, 0]);
 var xAxis = d3.svg.axis()
@@ -86,7 +86,7 @@ loadAllData();
 
 
 
-function createGraphic(data){
+function createGraphic(data, yScaleNum){
 
 var brush = d3.svg.brush()
 			.x(xScale2)
@@ -112,12 +112,17 @@ color.domain(d3.keys(data[0]).filter(function(key) {return key !== "date";}));
 //get domains for scales
 xScale.domain(d3.extent(data.map(function(d) { return gd(d.date);})));
 xScale2.domain(xScale.domain());
+yScale.domain([0, yScaleNum]);
 yScale2.domain(yScale.domain());
+
 //need to write function to update yScale domain
 focus.select('.x.axis').transition()
     .call(xAxis);
 context.select('.x.axis').transition()
     .call(xAxis2);
+focus.select('.y.axis').transition()
+	.call(yAxis);
+
 
 //take input data and format it into an array of countries objects
 var countries = stack(color.domain().map(function(name) {
@@ -141,7 +146,8 @@ country.enter()
 		.attr("class", "area");
 		
 		
-country.selectAll("path").attr("d", function(d) { return area(d.values);})
+country.select(".area")
+		.attr("d", function(d) { return area(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 			
 country.exit().remove();
@@ -155,7 +161,7 @@ country2.enter()
 		.append("path")
 		.attr("class", "area");
 					
-country2.selectAll("path")
+country2.select(".area")
 		.attr("d", function(d){return area2(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 
@@ -191,7 +197,7 @@ tooltips.enter()
 			console.log("clicked");
 			updatePaths(d.name);});
 
-tooltips.selectAll("line")
+tooltips.selectAll(".tooltip")
 			.attr("x1", function(d) {return xScale(gd(d.date));})
 			.attr("x2", function(d) { return xScale(gd(d.date));})
 			.attr("y1", function(d) { return yScale(d.y0);})
@@ -235,7 +241,7 @@ tooltips.exit().remove();
 				
 //call this to redraw the tooltips after brushing.
 function updateTooltips(){
-		tooltips.selectAll("line")
+		tooltips.selectAll(".tooltip")
 				.transition()
 					.attr("x1", function(d){ return xScale(gd(d.date));})
 					.attr("x2", function(d) { return xScale(gd(d.date));});
@@ -247,26 +253,30 @@ var numFormat = d3.format(",g");
 	}
 	
 function updatePaths(name){
+	tooltipsArray=[];
 	if (name == "Africa"){
-		createGraphic(cache["Africa"]);
+		createGraphic(cache["Africa"],800000);
 		}
 	else if(name == "Asia"){
-		createGraphic(cache["Asia"]);
+		createGraphic(cache["Asia"],3500000);
 		}
 	else if(name == "Oceania"){
-		createGraphic(cache["Oceania"]);
+		createGraphic(cache["Oceania"],70000);
 		}
 	else if(name == "Europe"){
-		createGraphic(cache["Europe"]);
+		createGraphic(cache["Europe"],9000000);
 		}
 	else if(name == "Central America"){
-		createGraphic(cache["Central America"]);
+		createGraphic(cache["Central America"],700000);
 		}
 	else if(name == "South America"){
-		createGraphic(cache["South America"]);
+		createGraphic(cache["South America"],900000);
+		}
+	else if(name == "America"){
+		createGraphic(cache["America"],3000000);
 		}
 	else{
-		createGraphic(cache["All"]);
+		createGraphic(cache["All"],12000000);
 		}
 		}
 	
@@ -276,14 +286,14 @@ function loadAllData(){
 		});
 		d3.csv("testEurope.csv", function(error, data){
 			cache["Europe"]=data;
-			//createGraphic(data);
+			//createGraphic(data,9000000);
 		});
 		d3.csv("testAsia.csv", function(error, data){
 			cache["Asia"]=data;;
 		});
 		d3.csv("testCSV.csv", function(error, data){
 			cache["All"]=data;
-			createGraphic(data);
+			createGraphic(data, 12000000);
 		});
 		d3.csv("testCentralAmerica.csv", function(error, data){
 			cache["Central America"]=data;
@@ -293,6 +303,9 @@ function loadAllData(){
 		});
 		d3.csv("testSouthAmerica.csv", function(error, data){
 			cache["South America"]=data;
+		});
+		d3.csv("testAmerica.csv", function(error, data){
+			cache["America"]=data;
 		});
 		
 		
