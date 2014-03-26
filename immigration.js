@@ -182,12 +182,8 @@ context.append("g")
 countries.forEach(function(d){	
 	tooltipsArray = d3.merge([tooltipsArray,d.values]);
 		});
-
-		//console.log(tooltipsArray);
-
-var tooltips = focus.selectAll(".tooltip")
+var tooltips = focus.selectAll(".tooltipGroup")
 				.data(tooltipsArray);
-	
 tooltips.enter()
 		.append("g")
 		.attr("class", "tooltipGroup")
@@ -196,8 +192,7 @@ tooltips.enter()
 		.on("click", function(d){
 			console.log("clicked");
 			updatePaths(d.name);});
-
-tooltips.selectAll(".tooltip")
+tooltips.select(".tooltip")
 			.attr("x1", function(d) {return xScale(gd(d.date));})
 			.attr("x2", function(d) { return xScale(gd(d.date));})
 			.attr("y1", function(d) { return yScale(d.y0);})
@@ -208,7 +203,6 @@ tooltips.selectAll(".tooltip")
 				else{
 					return yScale(d.y0);
 					}})
-			//.attr("class", ".infoLine")
 			.attr("stroke", "black")
 			.style("stroke-width", 5)
 			.attr("stroke-opacity", 0)
@@ -235,7 +229,6 @@ tooltips.selectAll(".tooltip")
 						.style("opacity", 0)
 						.duration(100);
 						});
-
 tooltips.exit().remove();
 
 				
