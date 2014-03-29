@@ -658,7 +658,7 @@ function locationSelect() {
 	if (location1=="World") {
 		p1 = worldMapPos;
 	}
-	else if (location1=="North America") {
+	else if (location1=="America") {
 		p1 = northAmericaPos
 	}
 	else if (location1=="Asia") {
@@ -869,7 +869,7 @@ function mapSelect() {
 			name: 'Canada',
 			radius: radius(canada,total),
 			yeild: canada,
-			continent: 'North America',
+			continent: 'America',
 			country: 'World',
 			percentage: (canada*1.0/total),
 			fillKey: 'GBR',
@@ -881,7 +881,7 @@ function mapSelect() {
 			name: 'Mexico',
 			radius: radius(mexico,total),
 			yeild: mexico,
-			continent: 'North America',
+			continent: 'America',
 			country: 'World',
 			percentage: (mexico*1.0/total),
 			fillKey: 'GBR',
@@ -893,7 +893,7 @@ function mapSelect() {
 			name: 'Jamaica',
 			radius: radius(jamaica,total),
 			yeild: jamaica,
-			continent: 'North America',
+			continent: 'America',
 			percentage: (jamaica*1.0/total),
 			country: 'World',
 			fillKey: 'GBR',
@@ -905,7 +905,7 @@ function mapSelect() {
 			name: 'Cuba',
 			radius: radius(cuba,total),
 			yeild: cuba,
-			continent: 'North America',
+			continent: 'America',
 			country: 'World',
 			percentage: (cuba*1.0/total),
 			fillKey: 'GBR',
@@ -918,7 +918,7 @@ function mapSelect() {
 			radius: radius(haiti,total),
 			yeild: haiti,
 			percentage: (haiti*1.0/total),
-			continent: 'North America',
+			continent: 'America',
 			country: 'World',
 			fillKey: 'GBR',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
@@ -929,7 +929,7 @@ function mapSelect() {
 			name: 'Dominican Republic',
 			radius: radius(dominican,total),
 			yeild: dominican,
-			continent: 'North America',
+			continent: 'America',
 			country: 'World',
 			percentage: (dominican*1.0/total),
 			fillKey: 'GBR',
