@@ -751,12 +751,12 @@ function mapSelect() {
 			latitude: 35.07,
 			longitude: 78.43
 		  },{
-			name: 'North America',
+			name: 'America',
 			radius: radius(northAmerica,total),
 			yeild: northAmerica,
-			continent: 'North America',
+			continent: 'America',
 			percentage: (northAmerica*1.0/total),
-			country: 'North America',
+			country: 'America',
 			fillKey: 'CAN',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
@@ -828,7 +828,7 @@ function mapSelect() {
 	
 	}
 
-	else if (location1=='North America') {
+	else if (location1=='America') {
 		
 		d3.csv("testAmerica.csv", parser, function(error, data){
 		
@@ -846,18 +846,18 @@ function mapSelect() {
 		data.forEach(function(d){
 			
 			if (+d.date>=startYear && +d.date<=endYear) {
-				canada+= d.Canada;
-				total+= d.Canada;
-				mexico+= d.Mexico;
-				total+= d.Mexico;
+				canada+= d['Canada and Newfoundland 16, 17'];
+				total+= d['Canada and Newfoundland 16, 17'];
+				mexico+= d['Mexico 17,18'];
+				total+= d['Mexico 17,18'];
 				cuba+= d.Cuba;
 				total+= d.Cuba;
-				dominican+= d.Dominican;
-				total+= d.Dominican;
+				dominican+= d['Dominican Republic'];
+				total+= d['Dominican Republic'];
 				haiti+= d.Haiti;
 				total+= d.Haiti;
-				jamaica+= d.Jamaica;
-				total+= d.Jamaica;
+				jamaica+= d['Jamaica 19'];
+				total+= d['Jamaica 19'];
 			}	
 			
 		});
@@ -916,7 +916,7 @@ function mapSelect() {
 			},{
 			name: 'Haiti',
 			radius: radius(haiti,total),
-			yeild: haita,
+			yeild: haiti,
 			percentage: (haiti*1.0/total),
 			continent: 'North America',
 			country: 'World',
@@ -939,7 +939,7 @@ function mapSelect() {
 			longitude: 70
 			}
 		];
-		
+		console.log("am I getting here");
 		bubbles(bubbs);
 		});
 	}
