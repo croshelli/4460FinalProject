@@ -106,7 +106,7 @@ eventsKey.append("text")
 //to the data later in the code to create blocks of area with an
 //x position of x, and a bottom y of y0 and a top y of y1				
 var area = d3.svg.area()
-	.x(function(d) { return xScale(gd(d.date)); })
+	.x(function(d) {return xScale(gd(d.date)); })
 	.y0(function(d) {return yScale(d.y0);})
 	.y1(function(d) {return yScale(d.y0+d.y);});
 	
@@ -148,20 +148,26 @@ var tooltip = d3.select("body").append("div")
  
 loadAllData();
 
+
+
+function createGraphic(data, yScaleNum,eventInfo){
+
+
+cText.transition()
+		.text(countryText);
+		
 var brush = d3.svg.brush()
-			.x(xScale2);
-			
-// Create the brush
-context.append("g")
-		.attr("class", "x brush")
-		.call(brush)
-		.selectAll("rect")
-			.attr("y", -6)
-			.attr("height", height2+7);
-			
-function createGraphic(data, yScaleNum, eventInfo){
-	cText.transition()
-			.text(countryText);
+			.x(xScale2)
+			.on("brush", brushed);
+	
+function brushed(){
+	xScale.domain(brush.empty() ? xScale2.domain() : brush.extent());
+	country.select(".area").attr("d", function(d) {return area(d.values);});
+	focus.select(".x.axis").call(xAxis);
+	updateTooltips();
+	updateEvents();
+	}
+
 
 canvas.append("defs").append("clipPath")
 		.attr("id", "clip")
@@ -254,39 +260,22 @@ var countries = stack(color.domain().map(function(name) {
 					
 
 
-					console.log(countries);
 //create a country object on the for every country in the array countries
 var country = focus.selectAll(".country")
-					.data(countries, function(d){ return d.name; });
-
+					.data(countries);
+					
 country.enter()
 		.append("g")
 		.attr("class", "country")
-		.style('opacity',0)
 		.append("path")
-		.attr("class", "area")
-		.on('click', function(d){
-			updatePaths(d.name);
-		});
-		
-// Fade in the new elements
-focus.selectAll('g.country')
-	.transition()
-	.duration(1000)
-	.style('opacity', 1);
+		.attr("class", "area");
 		
 		
 country.select(".area")
 		.attr("d", function(d) { return area(d.values);})
 		.style("fill", function(d) {return color(d.name);});
 			
-country.exit()
-	.transition()
-	.duration(1000)
-	.style('opacity', 0)
-	.each('end', function(){
-		d3.select(this).remove();
-	})
+country.exit().remove();
 			
 var country2 = context.selectAll(".country2")
 				.data(countries);
@@ -303,19 +292,15 @@ country2.select(".area")
 
 country2.exit().remove();
 
-function brushed(){
-	xScale.domain(brush.empty() ? xScale2.domain() : brush.extent());
-	country.select(".area").attr("d", function(d) {return area(d.values);});
-	focus.select(".x.axis").call(xAxis);
-	updateTooltips();
-	updateEvents();
-}
 		
-// Redraw the brush
-brush.on("brush", brushed);
-brush.clear();
-context.select(".x.brush")
-	.call(brush);
+context.append("g")
+		.attr("class", "x brush")
+		.call(brush)
+		.selectAll("rect")
+			.attr("y", -6)
+			.attr("height", height3+7);
+					
+		
 
 				
 //adds the DoD lines and tooltips

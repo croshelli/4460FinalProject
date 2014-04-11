@@ -1,0 +1,73 @@
+body {
+	font: 10px sans-serif;
+	}
+
+	
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+	}
+
+.browser text{
+	text-anchor: end;
+	}
+.area{
+	clip-path: url(#clip);
+	}
+.brush .extent{
+	stroke: #fff;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+	}
+	
+#areaChartContainer{
+	position:relative;
+	width:1300px;
+	height:570px;
+	margin-top:10px;
+	}
+
+#areaChart{
+	width: 1000px;
+	height: 100%;
+	float: left;
+	}
+
+#details{
+	width: 300px;
+	height: 700px;
+	margin-left: 0px;
+	float: left;
+	}
+#detailsBox{
+	width: 300px;
+	height: 300px;
+	margin-left: 0px;
+	float: left;
+	}
+
+#eventsKey{
+	width: 300px;
+	height: 300px;
+	float: left;
+	margin-top: 120px;
+	}
+	
+
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 120px;                  
+  height: 42px;                 
+  padding: 2px;             
+  font: 10px sans-serif;        
+  background: white;   
+  border: 1px; 
+  stroke: black;  
+  border-radius: 8px;
+  stroke-width: 1px;
+  pointer-events: none;         
+}
