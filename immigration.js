@@ -2,21 +2,26 @@
 
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
-var margin = {top:40, right:20, bottom: 100, left:90};
-var margin2 = {top: 430, right: 20, bottom: 20, left: 90};
+var margin = {top:40, right:20, bottom: 140, left:90};
+var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
+var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
 var width = 1000-margin.left-margin.right;
-var height = 500-margin.top-margin.bottom;
-var height2 = 500 - margin2.top - margin2.bottom;
+var height = 560-margin.top-margin.bottom;
+var height2 = 560 - margin2.top - margin2.bottom;
+var height3 = 560 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
+var detailsWidth = 100;
+var detailsHeight = 300;
 var countrySelection = "all";
+var countryText = "World";
 var cache = {};
 var tooltipsArray = [];
 //create x and y scales and axis
 var xScale = d3.time.scale().range([0, width]);
 var yScale = d3.scale.linear().range([height, 0]);
 var xScale2 = d3.time.scale().range([0, width]);
-var yScale2 = d3.scale.linear().range([height2, 0]);
+var yScale2 = d3.scale.linear().range([height3, 0]);
 var xAxis = d3.svg.axis()
 			.scale(xScale)
 			.orient("bottom");
@@ -35,14 +40,67 @@ var stack = d3.layout.stack()
 var canvas = d3.select("#areaChart").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom);
+var details = d3.select("#detailsBox").append("svg")
+				.attr("width", detailsWidth)
+				.attr("height", detailsWidth);
 //this is the group we will put the focused paths on				
 var focus = canvas.append("g")
 			.attr("class", "focus")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// this is where we will put the event circles
+var events = canvas.append("g")
+				.attr("class", "events")
+				.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 //this is the group we can use to select certain years of data
 var context = canvas.append("g")
 			  .attr("class", "context")
-			  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+			  .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
+			  
+var eventsKey = d3.select("#eventsKey").append("svg")
+					.attr("width", 300)
+					.attr("height", 300);
+
+//create the key for circle colors
+eventsKey.append("circle")
+			.attr("fill", "pink")
+			.attr("r", 4)
+			.attr("transform", "translate(20,20)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("Other")
+			.attr("transform", "translate(30,23)");
+eventsKey.append("circle")
+			.attr("fill", "red")
+			.attr("r", 4)
+			.attr("transform", "translate(20,40)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("War")
+			.attr("transform", "translate(30,43)");
+eventsKey.append("circle")
+			.attr("fill", "black")
+			.attr("r", 4)
+			.attr("transform", "translate(90,20)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("Famine")
+			.attr("transform", "translate(100,23)");
+eventsKey.append("circle")
+			.attr("fill", "orange")
+			.attr("r", 4)
+			.attr("transform", "translate(90,40)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("US Law")
+			.attr("transform", "translate(100,43)");
+eventsKey.append("circle")
+			.attr("fill", "green")
+			.attr("r", 4)
+			.attr("transform", "translate(160,20)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("Economic")
+			.attr("transform", "translate(170,23)");
 			  
 //this variable will be used as a function and applied
 //to the data later in the code to create blocks of area with an
@@ -63,6 +121,10 @@ function gd(year){
 	nDate= new Date(yearN, 1,15);			
 	return nDate;
 }
+var cText = focus.append("text")
+				.attr("font-family", "sans-serif")
+				.attr("font-size", "30px")
+				 .attr("transform", "translate(40,0)");
 
 //add x1, x2 and y axis to vis
 focus.append("g")
@@ -74,8 +136,10 @@ focus.append("g")
 		.call(yAxis);
 context.append("g")
 		.attr("class", "x axis")
-		.attr("transform", "translate( 0," + height2 + ")")
+		.attr("transform", "translate( 0," + height3 + ")")
 		.call(xAxis2);
+
+
 		
 //adding information for the tooltip
 var tooltip = d3.select("body").append("div")   
@@ -86,8 +150,12 @@ loadAllData();
 
 
 
-function createGraphic(data, yScaleNum){
+function createGraphic(data, yScaleNum,eventInfo){
 
+
+cText.transition()
+		.text(countryText);
+		
 var brush = d3.svg.brush()
 			.x(xScale2)
 			.on("brush", brushed);
@@ -97,8 +165,10 @@ function brushed(){
 	country.select(".area").attr("d", function(d) {return area(d.values);});
 	focus.select(".x.axis").call(xAxis);
 	updateTooltips();
+	updateEvents();
 	}
-	
+
+
 canvas.append("defs").append("clipPath")
 		.attr("id", "clip")
 		.append("rect")
@@ -123,7 +193,60 @@ context.select('.x.axis').transition()
 focus.select('.y.axis').transition()
 	.call(yAxis);
 
+		
+var eventsCircles = events.selectAll(".eventsCircles")
+							.data(eventInfo); //load event info
+							
+eventsCircles.enter()
+				.append("g")
+				.attr("class", "eventsCircles")
+				.append("circle")
+				.attr("class", "eCircles");
+eventsCircles.select(".eCircles")
+				.attr("cx", function(d) { return xScale(gd(d.startDate));})// cx will change based on xScale and time
+				.attr("cy", 0)// y positions all the same
+				.attr("r", 4)//radius fixed
+				.attr("fill", function(d) {
+						var finalColor="black";
+						if (d.type == "Famine"){
+							finalColor = "black";
+							}
+						else if (d.type == "US Law"){
+							finalColor = "orange";
+							}
+						else if (d.type == "War"){
+							finalColor = "red";
+							}
+						else if(d.type == "Economic"){
+							finalColor = "green";
+							}
+						else{
+							finalColor = "pink";
+							}
+						
+						return finalColor;})//color based off of type
+				.on("mouseover", function(d){
+						d3.select(this).transition()
+								.attr("r", 8)
+								.duration(300);
+								
+						d3.select("#detailsBox").html(d.title + "<br/>" + "Year: " + d.startDate + "<br/>" + d.description );
+						})
+				.on("mouseout", function(d){
+					d3.select(this).transition()
+							.attr("r", 4)
+							.duration(300);
+							
+							});
+eventsCircles.exit().remove();
 
+// updates the position of the circles if brushing occurs
+function updateEvents(){
+		eventsCircles.selectAll(".eCircles")
+				.transition()
+					.attr("cx", function(d){ return xScale(gd(d.startDate));}); 
+			}
+ 
 //take input data and format it into an array of countries objects
 var countries = stack(color.domain().map(function(name) {
 				return {
@@ -134,6 +257,8 @@ var countries = stack(color.domain().map(function(name) {
 						})
 						};
 					}));
+					
+
 
 //create a country object on the for every country in the array countries
 var country = focus.selectAll(".country")
@@ -173,7 +298,7 @@ context.append("g")
 		.call(brush)
 		.selectAll("rect")
 			.attr("y", -6)
-			.attr("height", height2+7);
+			.attr("height", height3+7);
 					
 		
 
@@ -248,13 +373,15 @@ var numFormat = d3.format(",g");
 function updatePaths(name){
 	tooltipsArray=[];
 	if (name == "Africa"){
-		createGraphic(cache["Africa"],800000);
+	    countryText = "Africa";
+		createGraphic(cache["Africa"],800000, cache["wEvents"]);
 		location1=name;
 		locationSelect();
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else if(name == "Asia"){
-		createGraphic(cache["Asia"],3500000);
+	    countryText = "Asia";
+		createGraphic(cache["Asia"],3500000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -266,7 +393,8 @@ function updatePaths(name){
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else if(name == "Oceania"){
-		createGraphic(cache["Oceania"],70000);
+	    countryText = "Oceania";
+		createGraphic(cache["Oceania"],70000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -277,7 +405,8 @@ function updatePaths(name){
 		locationSelect();
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);		}
 	else if(name == "Europe"){
-		createGraphic(cache["Europe"],9000000);
+	    countryText = "Europe";
+		createGraphic(cache["Europe"],9000000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -289,7 +418,8 @@ function updatePaths(name){
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else if(name == "Central America"){
-		createGraphic(cache["Central America"],700000);
+	    countryText = "Central America";
+		createGraphic(cache["Central America"],700000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -301,7 +431,8 @@ function updatePaths(name){
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else if(name == "South America"){
-		createGraphic(cache["South America"],900000);
+	    countryText = "South America";
+		createGraphic(cache["South America"],900000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -313,7 +444,8 @@ function updatePaths(name){
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else if(name == "America"){
-		createGraphic(cache["America"],3000000);
+	    countryText = "America";
+		createGraphic(cache["America"],4000000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -325,7 +457,8 @@ function updatePaths(name){
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
 		}
 	else{
-		createGraphic(cache["All"],12000000);
+	    countryText = "World";
+		createGraphic(cache["All"],12000000, cache["wEvents"]);
 		theMap.svg.selectAll('circle').forEach(function(d) {
 					d.forEach(function(d1) {
 						d1.remove();
@@ -339,6 +472,9 @@ function updatePaths(name){
 		}
 	
 function loadAllData(){
+		d3.csv("historicalData.csv", function(error, data){
+			cache["wEvents"] = data;
+			});
 		d3.csv("testAfrica.csv", function(error, data){
 			cache["Africa"] = data;
 		});
@@ -351,7 +487,7 @@ function loadAllData(){
 		});
 		d3.csv("testCSV.csv", function(error, data){
 			cache["All"]=data;
-			createGraphic(data, 12000000);
+			createGraphic(data, 12000000, cache["wEvents"]);
 		});
 		d3.csv("testCentralAmerica.csv", function(error, data){
 			cache["Central America"]=data;
@@ -365,6 +501,7 @@ function loadAllData(){
 		d3.csv("testAmerica.csv", function(error, data){
 			cache["America"]=data;
 		});
+		
 		
 		
 		
