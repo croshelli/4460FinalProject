@@ -125,7 +125,12 @@ var cText = focus.append("text")
 				.attr("font-family", "sans-serif")
 				.attr("font-size", "30px")
 				 .attr("transform", "translate(40,0)");
-
+				 
+var countryFinalGroup = focus.append("g")
+								.attr("class", "countryFinalGroup");
+var tooltipsFinalGroup = focus.append("g")
+								.attr("class", "tooltipsFinalGroup");
+								
 //add x1, x2 and y axis to vis
 focus.append("g")
 		.attr("class", "x axis")
@@ -256,7 +261,7 @@ var countries = stack(color.domain().map(function(name) {
 
 					console.log(countries);
 //create a country object on the for every country in the array countries
-var country = focus.selectAll(".country")
+var country = countryFinalGroup.selectAll(".country")
 					.data(countries, function(d){ return d.name; });
 
 country.enter()
@@ -322,7 +327,7 @@ context.select(".x.brush")
 countries.forEach(function(d){	
 	tooltipsArray = d3.merge([tooltipsArray,d.values]);
 		});
-var tooltips = focus.selectAll(".tooltipGroup")
+var tooltips = tooltipsFinalGroup.selectAll(".tooltipGroup")
 				.data(tooltipsArray);
 tooltips.enter()
 		.append("g")
