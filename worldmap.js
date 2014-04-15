@@ -164,6 +164,8 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 			'AUS': oceaniaColor,
 			'NZL': oceaniaColor,
 			
+			'123': #000000,
+			
 			defaultFill: defaultColor
 		},
 		data: {
@@ -747,7 +749,7 @@ function mapSelect() {
 			continent: 'Europe',
 			percentage: (germany*1.0/total),
 			country: 'World',
-			fillKey: 'GBR',
+			fillKey: 'JPN',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 20,

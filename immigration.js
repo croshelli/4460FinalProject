@@ -5,13 +5,13 @@
 var margin = {top:40, right:20, bottom: 140, left:90};
 var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
 var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
-var width = 1000-margin.left-margin.right;
+var width = 1200-margin.left-margin.right;
 var height = 560-margin.top-margin.bottom;
 var height2 = 560 - margin2.top - margin2.bottom;
 var height3 = 560 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
-var detailsWidth = 100;
+var detailsWidth = 500;
 var detailsHeight = 300;
 var countrySelection = "all";
 var countryText = "World";
@@ -41,8 +41,8 @@ var canvas = d3.select("#areaChart").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom);
 var details = d3.select("#detailsBox").append("svg")
-				.attr("width", detailsWidth)
-				.attr("height", detailsWidth);
+				//.attr("width", detailsWidth)
+				//.attr("height", detailsHeight);
 //this is the group we will put the focused paths on				
 var focus = canvas.append("g")
 			.attr("class", "focus")
@@ -698,6 +698,8 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 			'AUS': oceaniaColor,
 			'NZL': oceaniaColor,
 			
+			'123': '#1f77b4',
+			
 			defaultFill: defaultColor
 		},
 		data: {
@@ -785,7 +787,7 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 
 
 function bubbles(bubbs) {
-	//draw bubbles for thes
+	//draw bubbles for these
 	
 	if (bubbs) {
 		theMap.bubbles(bubbs, {
@@ -876,6 +878,26 @@ function mapSelect() {
 		var centralAmerica = 0;
 		var africa = 0;
 		var europe = 0;
+		var strongBlue='#1f77b4'; 
+		var verySoftBlue='#aec7e8';
+		var vividOrange= '#ff7f0e'; 
+		var veryLightOrange= '#ffbb78'; 
+		var darkLimeGreen='#2ca02c';
+		var verySoftLimeGreen= '#98df8a'; 
+		var strongRed= '#d62728';
+		var veryLightRed= '#ff9896'; 
+		var slightlyDesaturatedViolet= '#9467bd';
+		var greyishViolet= '#c5b0d5';
+		var darkModerateRed= '#8c564b'; 
+		var greyishRed='#c49c94'; 
+		var softPink='#e377c2'; 
+		var verySoftPink='#f7b6d2';
+		var darkGrey= '#7f7f7f'; 
+		var lightGrey='#c7c7c7';
+		var strongYellow= '#bcbd22'; 
+		var verySoftYellow='#dbdb8d'; 
+		var strongCyan='#17becf'; 
+		var verySoftCyan='#9edae5';
 		
 		
 		data1.forEach(function(d){
@@ -902,7 +924,7 @@ function mapSelect() {
 			continent: 'Asia',
 			percentage: (asia*1.0/total),
 			country: 'Asia',
-			fillKey: 'JPN',
+			fillKey: '123',
 			significance: 'First fusion weapon test by the USSR (not "staged")',
 			date: '1953-08-12',
 			latitude: 35.07,
@@ -914,7 +936,7 @@ function mapSelect() {
 			continent: 'America',
 			percentage: (northAmerica*1.0/total),
 			country: 'America',
-			fillKey: 'CAN',
+			fillKey: vividOrange,
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 40,
@@ -926,7 +948,8 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'South America',
 			percentage: (southAmerica*1.0/total),
-			fillKey: 'BRA',
+			fillKey: darkLimeGreen,
+
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: -10,
@@ -938,7 +961,8 @@ function mapSelect() {
 			continent: 'Central America',
 			country: 'Central America',
 			percentage: (centralAmerica*1.0/total),
-			fillKey: 'CRI',
+			fillKey: veryLightOrange,
+
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 10,
@@ -950,7 +974,7 @@ function mapSelect() {
 			continent: 'Europe',
 			country: 'Europe',
 			percentage: (europe*1.0/total),
-			fillKey: 'GBR',
+			fillKey: strongBlue,
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 50,
@@ -962,7 +986,7 @@ function mapSelect() {
 			continent: 'Africa',
 			country: 'Africa',
 			percentage: (africa*1.0/total),
-			fillKey: 'EGY',
+			fillKey:verySoftLimeGreen,
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 10,
@@ -974,7 +998,7 @@ function mapSelect() {
 			continent: 'Oceania',
 			percentage: (oceania*1.0/total),
 			country: 'Oceania',
-			fillKey: 'AUS',
+			fillKey:strongRed,
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: -23,

@@ -42,17 +42,17 @@ body {
 	float: left;
 	}
 #detailsBox{
-	width: 300px;
-	height: 300px;
+//	width: 300px;
+//	height: 300px;
 	margin-left: 0px;
 	float: left;
 	}
 
 #eventsKey{
 	width: 300px;
-	height: 300px;
+	height: 70px;
 	float: left;
-	margin-top: 120px;
+//	margin-top: 120px;
 	}
 	
 
