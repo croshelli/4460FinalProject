@@ -5,14 +5,14 @@
 var margin = {top:40, right:20, bottom: 140, left:90};
 var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
 var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
-var width = 1200-margin.left-margin.right;
-var height = 560-margin.top-margin.bottom;
-var height2 = 560 - margin2.top - margin2.bottom;
-var height3 = 560 - margin3.top - margin3.bottom;
+var width = 800-margin.left-margin.right;
+var height = 600-margin.top-margin.bottom;
+var height2 = 600 - margin2.top - margin2.bottom;
+var height3 = 600 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
-var detailsWidth = 500;
-var detailsHeight = 300;
+var detailsWidth = 700;
+var detailsHeight = 200;
 var countrySelection = "all";
 var countryText = "World";
 var cache = {};
@@ -41,8 +41,8 @@ var canvas = d3.select("#areaChart").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom);
 var details = d3.select("#detailsBox").append("svg")
-				//.attr("width", detailsWidth)
-				//.attr("height", detailsHeight);
+				.attr("width", detailsWidth)
+				.attr("height", detailsHeight);
 //this is the group we will put the focused paths on				
 var focus = canvas.append("g")
 			.attr("class", "focus")
@@ -57,26 +57,27 @@ var context = canvas.append("g")
 			  .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
 			  
 var eventsKey = d3.select("#eventsKey").append("svg")
-					.attr("width", 300)
-					.attr("height", 300);
+					.attr("width", 700)
+					.attr("height", 50);
 
+//create the key for circle colors
 //create the key for circle colors
 eventsKey.append("circle")
 			.attr("fill", "pink")
 			.attr("r", 4)
-			.attr("transform", "translate(20,20)");
+			.attr("transform", "translate(300,20)");
 eventsKey.append("text")
-			.attr("font-size", "12px")
+			.attr("font-size", "15px")
 			.text("Other")
-			.attr("transform", "translate(30,23)");
+			.attr("transform", "translate(310,23)");
 eventsKey.append("circle")
 			.attr("fill", "red")
 			.attr("r", 4)
-			.attr("transform", "translate(20,40)");
+			.attr("transform", "translate(245,20)");
 eventsKey.append("text")
 			.attr("font-size", "12px")
 			.text("War")
-			.attr("transform", "translate(30,43)");
+			.attr("transform", "translate(255,23)");
 eventsKey.append("circle")
 			.attr("fill", "black")
 			.attr("r", 4)
@@ -88,19 +89,19 @@ eventsKey.append("text")
 eventsKey.append("circle")
 			.attr("fill", "orange")
 			.attr("r", 4)
-			.attr("transform", "translate(90,40)");
-eventsKey.append("text")
-			.attr("font-size", "12px")
-			.text("US Law")
-			.attr("transform", "translate(100,43)");
-eventsKey.append("circle")
-			.attr("fill", "green")
-			.attr("r", 4)
 			.attr("transform", "translate(160,20)");
 eventsKey.append("text")
 			.attr("font-size", "12px")
-			.text("Economic")
+			.text("US Law")
 			.attr("transform", "translate(170,23)");
+eventsKey.append("circle")
+			.attr("fill", "green")
+			.attr("r", 4)
+			.attr("transform", "translate(5,20)");
+eventsKey.append("text")
+			.attr("font-size", "12px")
+			.text("Economic")
+			.attr("transform", "translate(15,23)");
 			  
 //this variable will be used as a function and applied
 //to the data later in the code to create blocks of area with an
