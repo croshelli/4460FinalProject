@@ -5,8 +5,8 @@
 var margin = {top:40, right:20, bottom: 140, left:90};
 var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
 var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
-var width = 1200-margin.left-margin.right;
-var height = 560-margin.top-margin.bottom;
+var width = 900-margin.left-margin.right;
+var height = 400-margin.top-margin.bottom;
 var height2 = 560 - margin2.top - margin2.bottom;
 var height3 = 560 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
