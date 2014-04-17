@@ -39,7 +39,11 @@ body {
 #areaChartContainer{
 	position:relative;
 	width: 800px;
+<<<<<<< HEAD
 	height: 600px;
+=======
+	height: 500px;
+>>>>>>> FETCH_HEAD
 	float: left;
 	margin-top:10px;
 	margin-left: auto;
@@ -47,14 +51,23 @@ body {
 	}
 
 #areaChart{
+<<<<<<< HEAD
 	width: 800px;
 	height: 100%;
+=======
+	width: 900px;
+	height: 400px;
+>>>>>>> FETCH_HEAD
 	float: left;
 }
 
 #details{
 	width: 700px;
+<<<<<<< HEAD
 	height: 300px;
+=======
+	height: 200px;
+>>>>>>> FETCH_HEAD
 	margin-left: 100px;
 	margin-right: auto;
 	float: left;
@@ -74,15 +87,26 @@ body {
 }
 	
 #rightSide {
+<<<<<<< HEAD
 	float: left;
 	margin-top: 50px;
 	width: 300px;
+=======
+	//float: left;
+	//margin-top: 50px;
+	height: 800px;
+	width: 1000px;
+>>>>>>> FETCH_HEAD
 }
 
 #container{
 	float:left;
 	width: 100%;
+<<<<<<< HEAD
 	height: 200px;
+=======
+	height: 600px;
+>>>>>>> FETCH_HEAD
 	margin-left: auto;
 	margin-right: auto;
 	border:2px dotted;
