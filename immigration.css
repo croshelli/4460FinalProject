@@ -1,5 +1,12 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
 body {
-	font: 10px sans-serif;
+	padding-top: 20px;
+	font: 14px sans-serif;
 	}
 
 	
@@ -22,39 +29,65 @@ body {
 	shape-rendering: crispEdges;
 	}
 	
+#contentHolder{
+	width:1200px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #areaChartContainer{
 	position:relative;
-	width:1300px;
-	height:570px;
+	width: 800px;
+	height: 600px;
+	float: left;
 	margin-top:10px;
+	margin-left: auto;
+	margin-right: 50px;
 	}
 
 #areaChart{
-	width: 1000px;
+	width: 800px;
 	height: 100%;
 	float: left;
-	}
+}
 
 #details{
-	width: 300px;
-	height: 700px;
-	margin-left: 0px;
+	width: 700px;
+	height: 300px;
+	margin-left: 100px;
+	margin-right: auto;
 	float: left;
-	}
+}
+
 #detailsBox{
-//	width: 300px;
-//	height: 300px;
+	width: 700px;
+	height: 200px;
 	margin-left: 0px;
 	float: left;
-	}
+}
 
 #eventsKey{
-	width: 300px;
-	height: 70px;
+	width: 700px;
+	height: 50px;
 	float: left;
-//	margin-top: 120px;
-	}
+}
 	
+#rightSide {
+	float: left;
+	margin-top: 50px;
+	width: 300px;
+}
+
+#container{
+	float:left;
+	width: 100%;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	border:2px dotted;
+
+}	
 
 
 div.tooltip {   
