@@ -5,17 +5,10 @@
 var margin = {top:40, right:20, bottom: 140, left:90};
 var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
 var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
-<<<<<<< HEAD
-var width = 800-margin.left-margin.right;
-var height = 600-margin.top-margin.bottom;
-var height2 = 600 - margin2.top - margin2.bottom;
-var height3 = 600 - margin3.top - margin3.bottom;
-=======
 var width = 900-margin.left-margin.right;
-var height = 400-margin.top-margin.bottom;
+var height = 500-margin.top-margin.bottom;
 var height2 = 560 - margin2.top - margin2.bottom;
 var height3 = 560 - margin3.top - margin3.bottom;
->>>>>>> FETCH_HEAD
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 var detailsWidth = 700;
@@ -403,6 +396,12 @@ function updatePaths(name){
 	if (name == "Africa"){
 	    countryText = "Africa";
 		createGraphic(cache["Africa"],800000, cache["wEvents"]);
+			theMap.svg.selectAll('circle').forEach(function(d) {
+					d.forEach(function(d1) {
+						d1.remove();
+					});
+				
+				});
 		location1=name;
 		locationSelect();
 		theMap.svg.select('.datamaps-subunits').call(transition, p0, p1);
@@ -553,14 +552,14 @@ var defaultColor = '#c7c7c7';
 var startYear = 1820;
 var endYear = 2000;
 
-var worldMapPos = [500,300,600];
-var northAmericaPos = [255,200,200];
-var southAmericaPos = [300,350,200];
-var centralAmericaPos = [280,265,70];
-var europePos = [550,180,150];
-var asiaPos = [725,225,200];
-var africaPos = [550,300,200];
-var oceaniaPos = [850,350,150];
+var worldMapPos = [200,150,400];
+var northAmericaPos = [105, 112,120];
+var southAmericaPos = [123,171,123];
+var centralAmericaPos = [115,138,50];
+var europePos = [221,103, 100];
+var asiaPos = [292,121,137];
+var africaPos = [222,153,147];
+var oceaniaPos = [340,175,100];
 
 var data1;
 
@@ -580,16 +579,18 @@ function createMap(data){
 	
 	data1=data;
 	
-	redrawMap(0,0,0,0,150);	
+	redrawMap(0,0,0,0,60);	
 	mapSelect();
 };	
 
 function transition(svg, start, end) {
-  var center = [1000 / 2, 600 / 2],
+  var center = [400/ 2, 300 / 2],
       i = d3.interpolateZoom(start, end);
 
   svg
       .attr("transform", transform(start))
+      // .attr("width", 800),
+      // .attr("height", 600),
       .transition()
       .delay(250)
       .duration(i.duration * 2)
@@ -600,7 +601,7 @@ function transition(svg, start, end) {
 	p0=p1;
 	p1=temp;
   function transform(p) {
-    var k = 600 / p[2];
+    var k = 400 / p[2];
     return "translate(" + (center[0] - p[0] * k) + "," + (center[1] - p[1] * k) + ")scale(" + k + ")";
   }
 };
@@ -938,6 +939,7 @@ function mapSelect() {
 			date: '1953-08-12',
 			latitude: 35.07,
 			longitude: 78.43
+		  
 		  },{
 			name: 'America',
 			radius: radius(northAmerica,total),
@@ -948,8 +950,9 @@ function mapSelect() {
 			fillKey: 'vividOrange',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
-			latitude: 40,
-			longitude: -100
+			// latitude: 40,
+			// longitude: -100
+			centered: 'USA'
 		  },{
 			name: 'South America',
 			radius: radius(southAmerica,total),
@@ -1063,8 +1066,9 @@ function mapSelect() {
 			fillKey: 'strongBlue',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
-			latitude: 60,
+			latitude: 66,
 			longitude: -50
+			// centered: 'CAN'
 			},{
 			name: 'Mexico',
 			radius: radius(mexico,total),
@@ -1076,7 +1080,7 @@ function mapSelect() {
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: -50,
-			longitude: -22
+			longitude: -24
 			},{
 			name: 'Jamaica',
 			radius: radius(jamaica,total),
@@ -1860,7 +1864,7 @@ function mapSelect() {
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
 			latitude: 70,
-			longitude: 60
+			longitude: 62
 			},{
 			name: 'Uruguay',
 			radius: radius(uruguay,total),
@@ -1883,8 +1887,8 @@ function mapSelect() {
 			fillKey: 'greyishRed',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
-			latitude: 80,
-			longitude: 36
+			latitude: 82,
+			longitude: 30
 			}
 		];
 		bubbles(bubbs);
@@ -2162,5 +2166,38 @@ function mapSelect() {
 	}
 
 };
+
+function handleEvent(e){
+ var evt = e ? e:window.event;
+ var clickX=0, clickY=0;
+
+ if ((evt.clientX || evt.clientY) &&
+     document.body &&
+     document.body.scrollLeft!=null) {
+  clickX = evt.clientX + document.body.scrollLeft;
+  clickY = evt.clientY + document.body.scrollTop;
+ }
+ if ((evt.clientX || evt.clientY) &&
+     document.compatMode=='CSS1Compat' && 
+     document.documentElement && 
+     document.documentElement.scrollLeft!=null) {
+  clickX = evt.clientX + document.documentElement.scrollLeft;
+  clickY = evt.clientY + document.documentElement.scrollTop;
+ }
+ if (evt.pageX || evt.pageY) {
+  clickX = evt.pageX;
+  clickY = evt.pageY;
+ }
+
+ alert (evt.type.toUpperCase() + ' mouse event:'
+  +'\n pageX = ' + clickX
+  +'\n pageY = ' + clickY 
+  +'\n clientX = ' + evt.clientX
+  +'\n clientY = '  + evt.clientY 
+  +'\n screenX = ' + evt.screenX 
+  +'\n screenY = ' + evt.screenY
+ )
+ return false;
+}
 	
 	

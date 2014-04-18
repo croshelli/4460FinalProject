@@ -6,7 +6,8 @@
 
 body {
 	padding-top: 20px;
-	font: 14px sans-serif;
+	font-family: 'Helvetica', sans-serif;
+	font-size: 14pt;
 	}
 
 	
@@ -30,44 +31,31 @@ body {
 	}
 	
 #contentHolder{
-	width:1200px;
-	height: auto;
+	width: 1200px;
+	height: 2000px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #areaChartContainer{
 	position:relative;
-	width: 800px;
-<<<<<<< HEAD
-	height: 600px;
-=======
-	height: 500px;
->>>>>>> FETCH_HEAD
+	width: 1000px;
+	height: 730px;
 	float: left;
-	margin-top:10px;
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 50px;
 	}
 
 #areaChart{
-<<<<<<< HEAD
-	width: 800px;
-	height: 100%;
-=======
 	width: 900px;
-	height: 400px;
->>>>>>> FETCH_HEAD
+	height: 500px;
 	float: left;
 }
 
 #details{
 	width: 700px;
-<<<<<<< HEAD
-	height: 300px;
-=======
 	height: 200px;
->>>>>>> FETCH_HEAD
 	margin-left: 100px;
 	margin-right: auto;
 	float: left;
@@ -75,38 +63,29 @@ body {
 
 #detailsBox{
 	width: 700px;
-	height: 200px;
+	height: 10px;
 	margin-left: 0px;
 	float: left;
 }
 
 #eventsKey{
 	width: 700px;
-	height: 50px;
+	height: 40px;
 	float: left;
 }
 	
-#rightSide {
-<<<<<<< HEAD
+/*#rightSide {
 	float: left;
 	margin-top: 50px;
-	width: 300px;
-=======
-	//float: left;
-	//margin-top: 50px;
 	height: 800px;
 	width: 1000px;
->>>>>>> FETCH_HEAD
-}
+}*/
 
 #container{
+	position: relative;
 	float:left;
-	width: 100%;
-<<<<<<< HEAD
-	height: 200px;
-=======
-	height: 600px;
->>>>>>> FETCH_HEAD
+	width: 400px;
+	height: 300px;
 	margin-left: auto;
 	margin-right: auto;
 	border:2px dotted;
