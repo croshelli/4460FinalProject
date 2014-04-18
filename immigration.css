@@ -7,7 +7,7 @@
 body {
 	padding-top: 20px;
 	font-family: 'Helvetica', sans-serif;
-	font-size: 14pt;
+	font-size: 12pt;
 	}
 
 	
@@ -32,29 +32,29 @@ body {
 	
 #contentHolder{
 	width: 1200px;
-	height: 2000px;
+	height: 900px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #areaChartContainer{
 	position:relative;
-	width: 1000px;
-	height: 730px;
+	width: 670px;
+	height: 570px;
 	float: left;
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 50px;
-	}
+}
 
 #areaChart{
-	width: 900px;
-	height: 500px;
+	width: 675px;
+	height: 100%;
 	float: left;
 }
 
 #details{
-	width: 700px;
+	width: 500px;
 	height: 200px;
 	margin-left: 100px;
 	margin-right: auto;
@@ -62,24 +62,24 @@ body {
 }
 
 #detailsBox{
-	width: 700px;
+	width: 500px;
 	height: 10px;
 	margin-left: 0px;
 	float: left;
 }
 
 #eventsKey{
-	width: 700px;
+	width: 500px;
 	height: 40px;
 	float: left;
 }
 	
-/*#rightSide {
+#rightSide {
 	float: left;
 	margin-top: 50px;
 	height: 800px;
-	width: 1000px;
-}*/
+	width: 420px;
+}
 
 #container{
 	position: relative;

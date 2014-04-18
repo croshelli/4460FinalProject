@@ -4,11 +4,11 @@
 // bottom edge and right edge of frame
 var margin = {top:40, right:20, bottom: 140, left:90};
 var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
-var margin3 = {top: 480, right: 20, bottom: 20, left: 90};
-var width = 900-margin.left-margin.right;
-var height = 500-margin.top-margin.bottom;
-var height2 = 560 - margin2.top - margin2.bottom;
-var height3 = 560 - margin3.top - margin3.bottom;
+var margin3 = {top: 500, right: 20, bottom: 20, left: 90};
+var width = 670-margin.left-margin.right;
+var height = 600-margin.top-margin.bottom;
+var height2 = 600 - margin2.top - margin2.bottom;
+var height3 = 570 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 var detailsWidth = 700;
@@ -163,7 +163,7 @@ context.append("g")
 		.call(brush)
 		.selectAll("rect")
 			.attr("y", -6)
-			.attr("height", height2+7);
+			.attr("height", height2-10);
 			
 function createGraphic(data, yScaleNum, eventInfo){
 	cText.transition()
