@@ -3,16 +3,16 @@
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
 var margin = {top:40, right:20, bottom: 140, left:90};
-var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
-var margin3 = {top: 500, right: 20, bottom: 20, left: 90};
-var width = 670-margin.left-margin.right;
-var height = 600-margin.top-margin.bottom;
-var height2 = 600 - margin2.top - margin2.bottom;
-var height3 = 570 - margin3.top - margin3.bottom;
+var margin2 = {top: 335, right: 20, bottom: 40, left: 90};
+var margin3 = {top: 375, right: 20, bottom: 20, left: 90};
+var width = 610-margin.left-margin.right;
+var height = 475-margin.top-margin.bottom;
+var height2 = 445 - margin2.top - margin2.bottom;
+var height3 = 445 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
-var detailsWidth = 700;
-var detailsHeight = 200;
+var detailsWidth = 500;
+var detailsHeight = 100;
 var countrySelection = "all";
 var countryText = "World";
 var cache = {};
@@ -67,7 +67,7 @@ eventsKey.append("circle")
 			.attr("r", 4)
 			.attr("transform", "translate(300,20)");
 eventsKey.append("text")
-			.attr("font-size", "15px")
+			.attr("font-size", "12px")
 			.text("Other")
 			.attr("transform", "translate(310,23)");
 eventsKey.append("circle")
@@ -123,9 +123,11 @@ function gd(year){
 	return nDate;
 }
 var cText = focus.append("text")
-				.attr("font-family", "sans-serif")
-				.attr("font-size", "30px")
-				 .attr("transform", "translate(40,0)");
+				.attr("font-family", "HelveticaNeue-Light", "'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif")
+				.attr("font-weight", "lighter")
+				.attr("font-size", "26px")
+				.attr("text-align", "center")
+				.attr("transform", "translate(20, 150)");
 				 
 var countryFinalGroup = focus.append("g")
 								.attr("class", "countryFinalGroup");
@@ -162,8 +164,8 @@ context.append("g")
 		.attr("class", "x brush")
 		.call(brush)
 		.selectAll("rect")
-			.attr("y", -6)
-			.attr("height", height2-10);
+			.attr("y", -1)
+			.attr("height", height2-20);
 			
 function createGraphic(data, yScaleNum, eventInfo){
 	cText.transition()
@@ -535,10 +537,11 @@ function loadAllData(){
 		}
 		
 	
-///////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
-//////////////OMG ALL THE CODE////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+//////////////OMG ALL THE CODE (For the Map)/////////////////////////
 
+//the initial colors for the map continents 
 var theMap;
 var europeColor = '#1f77b4';
 var africaColor = '#98df8a';
@@ -552,6 +555,7 @@ var defaultColor = '#c7c7c7';
 var startYear = 1820;
 var endYear = 2000;
 
+//define the original x, y, z cooridnates for the areas of the map
 var worldMapPos = [200,150,400];
 var northAmericaPos = [105, 112,120];
 var southAmericaPos = [123,171,123];
@@ -563,11 +567,11 @@ var oceaniaPos = [340,175,100];
 
 var data1;
 
-
 var p0 = worldMapPos;
 var p1 = northAmericaPos;
 var temp;
 
+//set initial location to world 
 var location1 = "World";
 
 d3.csv("testCSV.csv", function(error, data){
@@ -575,6 +579,7 @@ d3.csv("testCSV.csv", function(error, data){
 });
 
 
+//draws the map at specific center x, center y, rotation x, rotation y, and scale 
 function createMap(data){
 	
 	data1=data;
@@ -583,14 +588,15 @@ function createMap(data){
 	mapSelect();
 };	
 
+
+//the zoom+pan animation
 function transition(svg, start, end) {
+  //the center is the center of the map inside its container
   var center = [400/ 2, 300 / 2],
       i = d3.interpolateZoom(start, end);
 
   svg
       .attr("transform", transform(start))
-      // .attr("width", 800),
-      // .attr("height", 600),
       .transition()
       .delay(250)
       .duration(i.duration * 2)
@@ -600,24 +606,34 @@ function transition(svg, start, end) {
 	temp = p0;
 	p0=p1;
 	p1=temp;
+
   function transform(p) {
     var k = 400 / p[2];
     return "translate(" + (center[0] - p[0] * k) + "," + (center[1] - p[1] * k) + ")scale(" + k + ")";
   }
 };
 
-	
+//function actually draws the map. 
+//scale == zoom 
 function redrawMap(center1,center2,rotate1,rotate2,scale){
 	document.getElementById('container').innerHTML="";
 	theMap = new Datamap({
 		
 		element: document.getElementById('container'),
 		scope: 'world',
+		//change the look of the map/interactors
 		geographyConfig: {
+			borderWidth: 0.5,
+ 	        borderColor: '#FDFDFD',
+
 			popupOnHover: true,
-			highlightOnHover: true
+			highlightOnHover: true,
+       	 	highlightBorderColor: 'rgba(55, 55, 55, 0.2)',
+        	highlightBorderWidth: 1,
+        	highlightFillOpacity: 0.3
 		},
 		
+		//change the projection (mercator)
 		setProjection: function(element) {
 			var projection = d3.geo.equirectangular()
 			.center([center1, center2])
@@ -629,6 +645,7 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 			return {path: path, projection: projection}; 
 		},
 
+		//colors for each country, cooresponds to the area chart colors
 		fills: {
 			'AUT': europeColor,
 			'HUN': europeColor,
@@ -707,7 +724,7 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 			'AUS': oceaniaColor,
 			'NZL': oceaniaColor,
 			
-
+			//define the color/values 
 			'strongBlue': '#1f77b4', 
 			'verySoftBlue': '#aec7e8',
 			'vividOrange': ' #ff7f0e', 
@@ -731,6 +748,8 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 			
 			defaultFill: defaultColor
 		},
+
+		//set the color for each country to it's cooresponding key
 		data: {
 			'AUT': {fillKey: 'AUT'},
 			'HUN': {fillKey: 'HUN'},
@@ -814,7 +833,7 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 };
 
 
-
+//draw/configure bubbles
 function bubbles(bubbs) {
 	//draw bubbles for these
 	
@@ -828,7 +847,7 @@ function bubbles(bubbs) {
 					'</div>'].join('');
 			}
 			
-		
+
 		});
 
 		theMap.svg.selectAll('.datamaps-bubble').on('click', function() {
@@ -842,6 +861,7 @@ function bubbles(bubbs) {
 	}
 	};
 
+//for interactors
 function locationSelect() {
 	if (location1=="World") {
 		p1 = worldMapPos;
@@ -869,6 +889,8 @@ function locationSelect() {
 	}
 };	
 	
+//for selection on the map (click bubble for zoom in/out, redraws the map at
+// the correct position, redraws the bubbles for the coutries selected)
 function mapSelect() {
 	var bubbs;
 	function radius (num1,num2) {
@@ -898,7 +920,7 @@ function mapSelect() {
 		return clean;
 	};
 
-	
+	//draw world/continent bubbles
 	if (location1=="World") {
 		var asia = 0;
 		var oceania = 0;
@@ -950,9 +972,9 @@ function mapSelect() {
 			fillKey: 'vividOrange',
 			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
 			date: '1955-11-22',
-			// latitude: 40,
-			// longitude: -100
-			centered: 'USA'
+			latitude: 40,
+			longitude: -100
+			// centered: 'USA'
 		  },{
 			name: 'South America',
 			radius: radius(southAmerica,total),
@@ -1018,7 +1040,7 @@ function mapSelect() {
 		bubbles(bubbs);
 	
 	}
-
+	//draw americas
 	else if (location1=='America') {
 		
 		d3.csv("testAmerica.csv", parser, function(error, data){
@@ -1135,6 +1157,7 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+	//draw europe
 	else if (location1=='Europe') {
 		
 		d3.csv("testEurope.csv", parser, function(error, data){
@@ -1484,6 +1507,8 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+
+	//if africa is selected
 	else if (location1=='Africa') {
 		
 		d3.csv("testAfrica.csv", parser, function(error, data){
@@ -1578,6 +1603,7 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+	//if central america is selected
 	else if (location1=='Central America') {
 		
 		d3.csv("testCentralAmerica.csv", parser, function(error, data){
@@ -1700,6 +1726,7 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+	//if south america is selected
 	else if (location1=='South America') {
 		
 		d3.csv("testSouthAmerica.csv", parser, function(error, data){
@@ -1894,6 +1921,7 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+	//if oceania is selected
 		else if (location1=='Oceania') {
 		
 		d3.csv("testOceania.csv", parser, function(error, data){
@@ -1946,6 +1974,7 @@ function mapSelect() {
 		bubbles(bubbs);
 		});
 	}
+	//if asia is selected 
 	else if (location1=="Asia") {
 		
 		
@@ -2166,38 +2195,3 @@ function mapSelect() {
 	}
 
 };
-
-function handleEvent(e){
- var evt = e ? e:window.event;
- var clickX=0, clickY=0;
-
- if ((evt.clientX || evt.clientY) &&
-     document.body &&
-     document.body.scrollLeft!=null) {
-  clickX = evt.clientX + document.body.scrollLeft;
-  clickY = evt.clientY + document.body.scrollTop;
- }
- if ((evt.clientX || evt.clientY) &&
-     document.compatMode=='CSS1Compat' && 
-     document.documentElement && 
-     document.documentElement.scrollLeft!=null) {
-  clickX = evt.clientX + document.documentElement.scrollLeft;
-  clickY = evt.clientY + document.documentElement.scrollTop;
- }
- if (evt.pageX || evt.pageY) {
-  clickX = evt.pageX;
-  clickY = evt.pageY;
- }
-
- alert (evt.type.toUpperCase() + ' mouse event:'
-  +'\n pageX = ' + clickX
-  +'\n pageY = ' + clickY 
-  +'\n clientX = ' + evt.clientX
-  +'\n clientY = '  + evt.clientY 
-  +'\n screenX = ' + evt.screenX 
-  +'\n screenY = ' + evt.screenY
- )
- return false;
-}
-	
-	
