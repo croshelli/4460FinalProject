@@ -3,12 +3,12 @@
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
 var margin = {top:40, right:20, bottom: 140, left:90};
-var margin2 = {top: 335, right: 20, bottom: 40, left: 90};
-var margin3 = {top: 375, right: 20, bottom: 20, left: 90};
-var width = 610-margin.left-margin.right;
-var height = 475-margin.top-margin.bottom;
-var height2 = 445 - margin2.top - margin2.bottom;
-var height3 = 445 - margin3.top - margin3.bottom;
+var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
+var margin3 = {top: 700, right: 20, bottom: 20, left: 90};
+var width = 670-margin.left-margin.right;
+var height = 600-margin.top-margin.bottom;
+var height2 = 600 - margin2.top - margin2.bottom;
+var height3 = 770 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 var detailsWidth = 500;
@@ -38,6 +38,7 @@ var stack = d3.layout.stack()
 				.values(function(d) {return d.values;});			 
 //this is the svg canvas we will draw to
 var canvas = d3.select("#areaChart").append("svg")
+				.attr("overflow", "visible")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom);
 var details = d3.select("#detailsBox").append("svg")
@@ -551,6 +552,13 @@ var asiaColor = '#aec7e8';
 var centralAmericaColor = '#ffbb78';
 var oceaniaColor = '#d62728';
 var defaultColor = '#c7c7c7';
+var country_color = d3.scale.ordinal()
+					.domain(["strongBlue", "verySoftBlue", "vividOrange","veryLightOrange", "darkLimeGreen", "verySoftLimeGreen","strongRed", "veryLightRed", "slightlyDesaturatedViolet","greyishViolet", "darkModerateRed","greyishRed", "softPink", "verySoftPink","darkGrey", "lightGrey", "strongYellow","verySoftYellow", "strongCyan","verySoftCyan"])
+					.range(['#1f77b4', '#aec7e8', '#ff7f0e','#ffbb78', '#2ca02c', '#98df8a','#d62728', '#ff9896', '#9467bd',' #c5b0d5',' #8c564b','#c49c94','#e377c2','#f7b6d2',' #7f7f7f','#c7c7c7',' #bcbd22','#dbdb8d','#17becf','#9edae5']);
+
+var country_group_color = d3.scale.ordinal()
+					.domain(['USA','GRL','SEN','MRT','DZA','BFA','CIV','NER','NGA','TCD','COG','MWI','NAM','MDG','MOZ','BWA','ZMB','ZWE','CMR','SOM','TZA','BDI','EAU','EAK','SSD','ERI','SDN','CAF','KEN','COD','GAB','LBY','BEN','GHA','TUN','MLI','GIN','GNB','AUT','HUN','BEL','BGR','CZE','DNK','FIN','FRA','DEU','GRC','IRL','ITA','NLD','NOR','SWE','POL','PRT','ROU','RUS','ESP','CHE','GBR','CHN','HKG','IND','IRN','ISR','JPN','JOR','KOR','PHL','SYR','TWN','TUR','VNM','CAN','MEX','CUB','DOM','HTI','JAM','BLZ','CRI','SLV','GTM','HND','NIC','PAN','ARG','BOL','BRA','CHL','COL','ECU','GUY','PRY','PER','SUR','URY','VEN','EGY','ETH','LBR','MAR','ZAF','AUS','NZL'])
+					.range(['#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7','#c7c7c7',europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,europeColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,asiaColor,northAmericaColor,northAmericaColor,northAmericaColor,northAmericaColor,northAmericaColor,northAmericaColor,centralAmericaColor,centralAmericaColor,centralAmericaColor,centralAmericaColor,centralAmericaColor,centralAmericaColor,centralAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,southAmericaColor,africaColor,africaColor,africaColor,africaColor,africaColor,oceaniaColor,oceaniaColor]);
 
 var startYear = 1820;
 var endYear = 2000;
@@ -623,15 +631,20 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 		scope: 'world',
 		//change the look of the map/interactors
 		geographyConfig: {
-			borderWidth: 0.5,
- 	        borderColor: '#FDFDFD',
-
+			borderWidth: 1,
+			borderColor: '#FFFFFF',
+			popupTemplate: function(geography, data){
+				return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+        },
 			popupOnHover: true,
 			highlightOnHover: true,
-       	 	highlightBorderColor: 'rgba(55, 55, 55, 0.2)',
-        	highlightBorderWidth: 1,
-        	highlightFillOpacity: 0.3
-		},
+			highlightFillColor: function(geography, data,fills){
+				var c=geography.id;
+				
+				return country_group_color(c);},
+			highlightBorderWidth: 1,
+			highlightBorderColor: "#7f7f7f"
+			},
 		
 		//change the projection (mercator)
 		setProjection: function(element) {
@@ -832,23 +845,38 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 	});	
 };
 
-
+var percent = d3.format("%");
 //draw/configure bubbles
 function bubbles(bubbs) {
 	//draw bubbles for these
 	
 	if (bubbs) {
 		theMap.bubbles(bubbs, {
+			borderWidth: 2,
+			borderColor: '#FFFFFF',
+			popupOnHover: true,
 			popupTemplate: function (geo, data) { 	
+					//console.log(data.name);
 					return ['<div class="hoverinfo">' +  data.name,
 					'<br/>Immigrants: ' +  data.yeild + '',
 					'<br/>Continent: ' +  data.continent + '',
-					'<br/>Percentage: ' + data.percentage + '',
+					'<br/>Percentage: ' + percent(data.percentage) + '',
 					'</div>'].join('');
-			}
+			},
+			fillOpacity: 0.75,
+			highlightOnHover: true,
+			highlightFillColor: function (bubbs, data) { 	
+					//console.log(bubbs.fillKey);
+					return country_color(bubbs.fillKey);
+			},
+			highlightBorderColor: '#7f7f7f',
+			highlightBorderWidth: 2,
+			highlightFillOpacity: 0.95
+    }
 			
-
-		});
+			
+		
+		);
 
 		theMap.svg.selectAll('.datamaps-bubble').on('click', function() {
 			location1 = this.__data__.country;
