@@ -352,8 +352,8 @@ tooltips.select(".tooltip")
 				else{
 					return yScale(d.y0);
 					}})
-			.attr("stroke", "black")
-			.style("stroke-width", 5)
+			.attr("stroke", "#7c7c7c")
+			.style("stroke-width", 3)
 			.attr("stroke-opacity", 0)
 			.on("mouseover", function(d){
 				//changes stroke opacity of the line to make it show up while the user is exploring the map
@@ -870,7 +870,7 @@ function bubbles(bubbs) {
 					return country_color(bubbs.fillKey);
 			},
 			highlightBorderColor: '#7f7f7f',
-			highlightBorderWidth: 2,
+			highlightBorderWidth: 3,
 			highlightFillOpacity: 0.95
     }
 			
