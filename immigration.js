@@ -3,12 +3,12 @@
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
 var margin = {top:40, right:20, bottom: 140, left:90};
-var margin2 = {top: 460, right: 20, bottom: 40, left: 90};
-var margin3 = {top: 700, right: 20, bottom: 20, left: 90};
+var margin2 = {top: 360, right: 20, bottom: 40, left: 90};
+var margin3 = {top: 550, right: 20, bottom: 20, left: 90};
 var width = 670-margin.left-margin.right;
-var height = 600-margin.top-margin.bottom;
-var height2 = 600 - margin2.top - margin2.bottom;
-var height3 = 770 - margin3.top - margin3.bottom;
+var height = 500-margin.top-margin.bottom;
+var height2 = 500 - margin2.top - margin2.bottom;
+var height3 = 620 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
 var detailsWidth = 500;
