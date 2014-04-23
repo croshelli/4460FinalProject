@@ -50,6 +50,7 @@ var focus = canvas.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 // this is where we will put the event circles
 var events = canvas.append("g")
+				.attr("overflow", "invisible")
 				.attr("class", "events")
 				.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 //this is the group we can use to select certain years of data
@@ -502,7 +503,7 @@ function updatePaths(name){
 		}
 	
 function loadAllData(){
-		d3.csv("historicalData.csv", function(error, data){
+		d3.csv("historicalData_4_22.csv", function(error, data){
 			cache["wEvents"] = data;
 			});
 		d3.csv("testAfrica.csv", function(error, data){
