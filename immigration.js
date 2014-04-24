@@ -632,7 +632,7 @@ function redrawMap(center1,center2,rotate1,rotate2,scale){
 		scope: 'world',
 		//change the look of the map/interactors
 		geographyConfig: {
-			borderWidth: 1,
+			borderWidth: .5,
 			borderColor: '#FFFFFF',
 			popupTemplate: function(geography, data){
 				return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
