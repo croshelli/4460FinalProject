@@ -11,8 +11,8 @@ var height2 = 500 - margin2.top - margin2.bottom;
 var height3 = 620 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
 var frameRight = 1000-margin.right;
-var detailsWidth = 500;
-var detailsHeight = 100;
+var detailsWidth = 550;
+var detailsHeight = 150;
 var countrySelection = "all";
 var countryText = "World";
 var cache = {};
@@ -59,8 +59,8 @@ var context = canvas.append("g")
 			  .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
 			  
 var eventsKey = d3.select("#eventsKey").append("svg")
-					.attr("width", 700)
-					.attr("height", 50);
+					.attr("width", 550)
+					.attr("height", 30);
 
 //create the key for circle colors
 //create the key for circle colors
