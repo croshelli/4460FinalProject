@@ -2,11 +2,11 @@
 
 //create constant buffers for margin, as well as variables for height, width
 // bottom edge and right edge of frame
-var margin = {top:40, right:20, bottom: 140, left:90};
+var margin = {top:40, right:20, bottom: 340, left:90};
 var margin2 = {top: 360, right: 20, bottom: 40, left: 90};
 var margin3 = {top: 550, right: 20, bottom: 20, left: 90};
 var width = 670-margin.left-margin.right;
-var height = 500-margin.top-margin.bottom;
+var height = 700-margin.top-margin.bottom;
 var height2 = 500 - margin2.top - margin2.bottom;
 var height3 = 620 - margin3.top - margin3.bottom;
 var frameBase = 500-margin.bottom;
@@ -923,7 +923,7 @@ function locationSelect() {
 function mapSelect() {
 	var bubbs;
 	function radius (num1,num2) {
-			return 5+70*(num1*1.0)/(num2*1.0);
+			return 5+40*(num1*1.0)/(num2*1.0);
 	};
 	
 	function parser (d) {
@@ -986,8 +986,6 @@ function mapSelect() {
 			percentage: (asia*1.0/total),
 			country: 'Asia',
 			fillKey: 'verySoftBlue',
-			significance: 'First fusion weapon test by the USSR (not "staged")',
-			date: '1953-08-12',
 			latitude: 35.07,
 			longitude: 78.43
 		  
@@ -999,8 +997,6 @@ function mapSelect() {
 			percentage: (northAmerica*1.0/total),
 			country: 'America',
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
 			latitude: 40,
 			longitude: -100
 			// centered: 'USA'
@@ -1012,8 +1008,6 @@ function mapSelect() {
 			country: 'South America',
 			percentage: (southAmerica*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
 			latitude: -10,
 			longitude: -60
 		  },{
@@ -1024,8 +1018,6 @@ function mapSelect() {
 			country: 'Central America',
 			percentage: (centralAmerica*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
 			latitude: 10,
 			longitude: -85
 		  },{
@@ -1036,8 +1028,7 @@ function mapSelect() {
 			country: 'Europe',
 			percentage: (europe*1.0/total),
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 50,
 			longitude: 10
 		  },{
@@ -1048,8 +1039,7 @@ function mapSelect() {
 			country: 'Africa',
 			percentage: (africa*1.0/total),
 			fillKey:'verySoftLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 10,
 			longitude: 25
 		  },{
@@ -1060,8 +1050,7 @@ function mapSelect() {
 			percentage: (oceania*1.0/total),
 			country: 'Oceania',
 			fillKey:'strongRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -23,
 			longitude: 133
 		  }
@@ -1115,8 +1104,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (canada*1.0/total),
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 66,
 			longitude: -50
 			// centered: 'CAN'
@@ -1128,8 +1116,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (mexico*1.0/total),
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -50,
 			longitude: -24
 			},{
@@ -1140,8 +1127,7 @@ function mapSelect() {
 			percentage: (jamaica*1.0/total),
 			country: 'World',
 			fillKey: 'verySoftLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -60,
 			longitude: 45
 			},{
@@ -1152,8 +1138,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (cuba*1.0/total),
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -50,
 			longitude: 45
 			},{
@@ -1164,8 +1149,7 @@ function mapSelect() {
 			continent: 'America',
 			country: 'World',
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -57,
 			longitude: 65
 			},{
@@ -1176,8 +1160,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (dominican*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -57,
 			longitude: 70
 			}
@@ -1263,8 +1246,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (austria*1.0/total),
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 5,
 			longitude: -18
 			},{
@@ -1275,8 +1257,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (hungary*1.0/total),
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 5,
 			longitude: 0
 			},{
@@ -1287,8 +1268,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (belgium*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 23,
 			longitude: -55
 			},{
@@ -1299,8 +1279,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (bulgaria*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -15,
 			longitude: 30
 			},{
@@ -1311,8 +1290,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (czechoslovakia*1.0/total),
 			fillKey: 'verySoftLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 15,
 			longitude: -18
 			},{
@@ -1323,8 +1301,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (denmark*1.0/total),
 			fillKey: 'strongRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 45,
 			longitude: -40
 			},{
@@ -1335,8 +1312,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (finland*1.0/total),
 			fillKey: 'veryLightRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 60,
 			longitude: -40
 			},{
@@ -1347,8 +1323,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (france*1.0/total),
 			fillKey: 'slightlyDesaturatedViolet',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 5,
 			longitude: -65
 			},{
@@ -1359,8 +1334,7 @@ function mapSelect() {
 			percentage: (germany*1.0/total),
 			country: 'World',
 			fillKey: 'greyishViolet',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 20,
 			longitude: -38
 			},{
@@ -1371,8 +1345,7 @@ function mapSelect() {
 			percentage: (greece*1.0/total),
 			country: 'World',
 			fillKey: 'darkModerateRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -30,
 			longitude: 15
 			},{
@@ -1383,8 +1356,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (ireland*1.0/total),
 			fillKey: 'greyishRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 32,
 			longitude: -100
 			},{
@@ -1395,8 +1367,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (italy*1.0/total),
 			fillKey: 'softPink',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -15,
 			longitude: -28
 			},{
@@ -1407,8 +1378,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (netherlands*1.0/total),
 			fillKey: 'verySoftPink',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 27,
 			longitude: -55
 			},{
@@ -1419,8 +1389,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (norway*1.0/total),
 			fillKey: 'lightGrey',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 60,
 			longitude: -40
 			},{
@@ -1431,8 +1400,7 @@ function mapSelect() {
 			percentage: (sweden*1.0/total),
 			country: 'World',
 			fillKey: 'softLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 60,
 			longitude: -20
 			},{
@@ -1443,8 +1411,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (poland*1.0/total),
 			fillKey: 'strongYellow',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 25,
 			longitude: 0
 			},{
@@ -1455,8 +1422,7 @@ function mapSelect() {
 			percentage: (portugal*1.0/total),
 			country: 'World',
 			fillKey: 'strongCyan',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -25,
 			longitude: -105
 			},{
@@ -1467,8 +1433,7 @@ function mapSelect() {
 			percentage: (romania*1.0/total),
 			country: 'World',
 			fillKey: 'verySoftCyan',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 0,
 			longitude: 30
 			},{
@@ -1479,8 +1444,7 @@ function mapSelect() {
 			continent: 'Europe',
 			country: 'World',
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 32,
 			longitude: 70
 			},{
@@ -1491,8 +1455,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (spain*1.0/total),
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -25,
 			longitude: -92
 			},{
@@ -1503,8 +1466,7 @@ function mapSelect() {
 			percentage: (switzerland*1.0/total),
 			country: 'World',
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 5,
 			longitude: -45
 			},{
@@ -1515,8 +1477,7 @@ function mapSelect() {
 			continent: 'Europe',
 			country: 'World',
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 32,
 			longitude: -85
 			},{
@@ -1527,8 +1488,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (yugoslavia*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -8,
 			longitude: 0
 			}
@@ -1575,8 +1535,7 @@ function mapSelect() {
 			percentage: (egypt*1.0/total),
 			country: 'World',
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 85,
 			longitude: 30
 			},{
@@ -1587,8 +1546,7 @@ function mapSelect() {
 			percentage: (ethiopia*1.0/total),
 			country: 'World',
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 30,
 			longitude: 60
 			},{
@@ -1599,8 +1557,7 @@ function mapSelect() {
 			percentage: (liberia*1.0/total),
 			country: 'World',
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 20,
 			longitude: -85
 			},{
@@ -1611,8 +1568,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (morocco*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 85,
 			longitude: -90
 			},{
@@ -1623,8 +1579,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (southAfrica*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -87,
 			longitude: 15
 			}
@@ -1674,8 +1629,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (belize*1.0/total),
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 35,
 			longitude: -40
 			},{
@@ -1686,8 +1640,7 @@ function mapSelect() {
 			percentage: (costaRica*1.0/total),
 			country: 'World',
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -30,
 			longitude: 0
 			},{
@@ -1698,8 +1651,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (elSalvador*1.0/total),
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 3,
 			longitude: -40
 			},{
@@ -1710,8 +1662,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (guatemala*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 25,
 			longitude: -50
 			},{
@@ -1722,8 +1673,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (honduras*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 12,
 			longitude: -25
 			},{
@@ -1734,8 +1684,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (nicaragua*1.0/total),
 			fillKey: 'verySoftLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -5,
 			longitude: -10
 			},{
@@ -1746,8 +1695,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (panama*1.0/total),
 			fillKey: 'strongRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -40,
 			longitude: 30
 			}
@@ -1809,8 +1757,7 @@ function mapSelect() {
 			percentage: (argentina*1.0/total),
 			country: 'World',
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -50,
 			longitude: 35
 			},{
@@ -1821,8 +1768,7 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'World',
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 10,
 			longitude: 30
 			},{
@@ -1833,8 +1779,7 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'World',
 			fillKey: 'vividOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 20,
 			longitude: 80
 			},{
@@ -1845,8 +1790,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (chile*1.0/total),
 			fillKey: 'veryLightOrange',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -50,
 			longitude: 10
 			},{
@@ -1857,10 +1801,9 @@ function mapSelect() {
 			country: 'World',
 			percentage: (colombia*1.0/total),
 			fillKey: 'darkLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
-			latitude: 65,
-			longitude: 10
+			
+			latitude: 75,
+			longitude: 0
 			},{
 			name: 'Ecuador',
 			radius: radius(ecuador,total),
@@ -1869,8 +1812,7 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'World',
 			fillKey: 'softLimeGreen',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 55,
 			longitude: -5
 			},{
@@ -1881,8 +1823,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (guyana*1.0/total),
 			fillKey: 'strongRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 75,
 			longitude: 50	
 			},{
@@ -1893,8 +1834,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (paraguay*1.0/total),
 			fillKey: 'veryLightRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -10,
 			longitude: 50
 			},{
@@ -1905,8 +1845,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (peru*1.0/total),
 			fillKey: 'slightlyDesaturatedViolet',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 30,
 			longitude: 0
 			},{
@@ -1917,8 +1856,7 @@ function mapSelect() {
 			country: 'World',
 			percentage: (suriname*1.0/total),
 			fillKey: 'lightGrey',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 70,
 			longitude: 62
 			},{
@@ -1929,8 +1867,7 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'World',
 			fillKey: 'darkModerateRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -40,
 			longitude: 60
 			},{
@@ -1941,8 +1878,7 @@ function mapSelect() {
 			continent: 'South America',
 			country: 'World',
 			fillKey: 'greyishRed',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: 82,
 			longitude: 30
 			}
@@ -1982,8 +1918,7 @@ function mapSelect() {
 			continent: 'Oceania',
 			country: 'World',
 			fillKey: 'strongBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -20,
 			longitude: 0
 			},{
@@ -1994,8 +1929,7 @@ function mapSelect() {
 			continent: 'Oceania',
 			country: 'World',
 			fillKey: 'verySoftBlue',
-			significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-			date: '1955-11-22',
+			
 			latitude: -80,
 			longitude: 160
 			}
@@ -2062,8 +1996,7 @@ function mapSelect() {
 				continent: 'Asia',
 				country: 'World',
 				fillKey: 'strongBlue',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+			
 				latitude: 20,
 				longitude: 40
 				},{
@@ -2074,8 +2007,7 @@ function mapSelect() {
 				continent: 'Asia',
 				country: 'World',
 				fillKey: 'verySoftBlue',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: -25,
 				longitude: 70
 				},{
@@ -2086,8 +2018,7 @@ function mapSelect() {
 				country: 'World',
 				percentage: (india*1.0/total),
 				fillKey: 'vividOrange',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: -15,
 				longitude: -22
 				},{
@@ -2098,8 +2029,7 @@ function mapSelect() {
 				percentage: (iran*1.0/total),
 				country: 'World',
 				fillKey: 'veryLightOrange',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 14,
 				longitude: -100
 				},{
@@ -2110,8 +2040,7 @@ function mapSelect() {
 				country: 'World',
 				percentage: (israel*1.0/total),
 				fillKey: 'darkLimeGreen',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 8,
 				longitude: -150
 				},{
@@ -2122,8 +2051,7 @@ function mapSelect() {
 				continent: 'Asia',
 				percentage: (japan*1.0/total),
 				fillKey: 'verySoftLimeGreen',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 30,
 				longitude: 160
 				},{
@@ -2134,8 +2062,7 @@ function mapSelect() {
 				percentage: (jordan*1.0/total),
 				country: 'World',
 				fillKey: 'strongRed',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 8,
 				longitude: -147
 				},{
@@ -2146,8 +2073,7 @@ function mapSelect() {
 				country: 'World',
 				percentage: (korea*1.0/total),
 				fillKey: 'veryLightRed',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 25,
 				longitude: 125
 				},{
@@ -2158,8 +2084,7 @@ function mapSelect() {
 				percentage: (philippines*1.0/total),
 				country: 'World',
 				fillKey: 'slightlyDesaturatedRed',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: -47,
 				longitude: 107
 				},{
@@ -2170,8 +2095,7 @@ function mapSelect() {
 				percentage: (syria*1.0/total),
 				country: 'World',
 				fillKey: 'greyishViolet',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 18,
 				longitude: -143
 				},{
@@ -2182,8 +2106,7 @@ function mapSelect() {
 				percentage: (taiwan*1.0/total),
 				country: 'World',
 				fillKey: 'darkModerateRed',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: -15,
 				longitude: 107
 				},{
@@ -2194,8 +2117,7 @@ function mapSelect() {
 				country: 'World',
 				percentage: (turkey*1.0/total),
 				fillKey: 'greyishRed',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: 32,
 				longitude: -145
 				},{
@@ -2206,8 +2128,7 @@ function mapSelect() {
 				percentage: (vietnam*1.0/total),
 				country: 'World',
 				fillKey: 'softPink',
-				significance: 'First "staged" thermonuclear weapon test by the USSR (deployable)',
-				date: '1955-11-22',
+				
 				latitude: -47,
 				longitude: 70
 				}
